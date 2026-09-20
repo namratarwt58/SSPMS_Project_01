@@ -30,3 +30,17 @@ Day 1 - Initial frontend setup
 ## Current Status
 
 Frontend foundation completed.
+
+## Progress Update Day 2
+Day 2:
+-Built Login Page 
+-Profile Section
+-Authentication front end only.
+-Added Study Planner Section
+-Added  Resources Section
+-Added Dashboard Section
+-Timer Section Added
+-Progress Section Added
+-Subjects and Study Session Section added
+
+
