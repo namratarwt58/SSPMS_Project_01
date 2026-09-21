@@ -34,17 +34,14 @@ Frontend foundation completed.
 ## Progress Update Day 2
 Day 2:
 -Built Login Page 
+-No authentication
 -Profile Section
--Authentication front end only.
--Added Study Planner Section
--Added  Resources Section
--Added Dashboard Section
--Timer Section Added
--Progress Section Added
--Subjects and Study Session Section added
+
 
 
 ## Day 3 Update:
-Added Task Module
-CRUD operations
-implemented responsive web design.
+-Added Task Module
+-CRUD operations
+-Implemented Responsiveness.
+ ## Current Progress:
+ Task Module CRUD completed and tested for responsiveness.
