@@ -1,1 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tasks | SSPMS</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">StudyFlow</div>
+
+            <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="tasks.html">Tasks</a>x
+            <a href="#">Planner</a>
+            <a href="#">Subjects</a>
+            <a href ="#">Pomodoro Timer</a>
+            <a href="#">Study Session </a>
+            <a href="#">Progress</a>
+            <a href="#">Resources</a>
+            <a href="profile.html">Profile</a>
+        </div>
+
+    </nav>
+
+
+    <main class="tasks-page">
+
+        <div class="tasks-header">
+
+            <p class="section-label">TASK MANAGEMENT</p>
+
+            <h1>Tasks</h1>
+
+            <p>
+                Organize your academic work, deadlines, and priorities.
+            </p>
+
+        </div>
+
+
+        <section class="task-form-section">
+
+            <div class="section-heading">
+                <h2>Add Task</h2>
+            </div>
+
+            <form id="task-form">
+
+                <div class="form-group">
+
+                    <label for="task-title">Task Title</label>
+
+                    <input
+                        type="text"
+                        id="task-title"
+                        placeholder="e.g. Complete DBMS assignment"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="task-description">Description</label>
+
+                    <textarea
+                        id="task-description"
+                        placeholder="Add details about the task"
+                        rows="4"
+                    ></textarea>
+
+                </div>
+
+
+                <div class="task-form-row">
+
+                    <div class="form-group">
+
+                        <label for="task-subject">Subject</label>
+
+                        <select id="task-subject" required>
+
+                            <option value="">Select subject</option>
+
+                            <option value="DBMS">DBMS</option>
+                            <option value="Java">Java</option>
+                            <option value="DSA">DSA</option>
+                            <option value="OS">Operating Systems</option>
+                            <option value="Digital Electronics">
+                                Digital Electronics
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="task-deadline">Deadline</label>
+
+                        <input
+                            type="date"
+                            id="task-deadline"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="task-priority">Priority</label>
+
+                        <select id="task-priority" required>
+
+                            <option value="">Select priority</option>
+
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <button type="submit" class="primary-button">
+                    Add Task
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <section class="tasks-list-section">
+
+            <div class="section-heading">
+
+                <h2>Your Tasks</h2>
+
+                <span id="task-count">0 tasks</span>
+
+            </div>
+
+
+            <div id="task-list" class="task-list">
+
+                <div class="empty-state" id="empty-task-state">
+
+                    <h3>No tasks yet</h3>
+
+                    <p>
+                        Add your first academic task to start organizing
+                        your workload.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
