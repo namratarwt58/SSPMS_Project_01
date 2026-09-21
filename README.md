@@ -44,3 +44,7 @@ Day 2:
 -Subjects and Study Session Section added
 
 
+## Day 3 Update:
+Added Task Module
+CRUD operations
+implemented responsive web design.
