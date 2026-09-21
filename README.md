@@ -16,8 +16,8 @@ SSPMS is a web-based student productivity system designed to help college studen
 - GitHub
 
 ## Current Status
+Day 1 - Frontend development setup of  files done.
 
-Day 1 - Initial frontend setup
 ## Current Progress
 
 - Created the initial HTML structure
@@ -31,17 +31,27 @@ Day 1 - Initial frontend setup
 
 Frontend foundation completed.
 
-## Progress Update Day 2
+## Day 2
+## Current Progress
 Day 2:
--Built Login Page 
+-Built Login Page
 -No authentication
--Profile Section
+-Profile Section Added
 
+## Current Status:
+-Login Page UI developed
+-No authentication or data storage.
 
-
-## Day 3 Update:
+## Day 3 :
 -Added Task Module
 -CRUD operations
 -Implemented Responsiveness.
+
  ## Current Progress:
- Task Module CRUD completed and tested for responsiveness.
+ -Task Module CRUD completed 
+ -Tested for responsiveness.
+ ## Current Status 
+ -1st Module Finished: Tasks Section
+ -Edit,Create,Update,Delete
+ -Set Priorities.
+
