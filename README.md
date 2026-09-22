@@ -55,7 +55,14 @@ Day 2:
  -Edit,Create,Update,Delete
  -Set Priorities.
  ## Day 4:
+ Task CRUD finalised.
+ 
+ ## Current Progress
  -Added EDIT feature to existing tasks.
  -No storage yet.
  -Updated Task Module
+
+ ## Current Status:
+ -Task Module completed.
+ 
 
