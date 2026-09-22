@@ -1998,5 +1998,29 @@ body {
     }
 
 }
+.edit-button {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+
+    padding: 8px 11px !important;
+    margin: 0 !important;
+
+    background: transparent !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 5px !important;
+
+    color: var(--text) !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+
+    cursor: pointer !important;
+}
+
+.edit-button:hover {
+    background: transparent !important;
+    border-color: var(--primary) !important;
+    color: var(--primary) !important;
+}
 
 
