@@ -1,8 +1,8 @@
 const taskForm = document.getElementById("task-form");
 const taskList = document.getElementById("task-list");
-const taskCount = document.getElementById("task-count");
+const taskCount = document.getElementById("task-status");
 const emptyTaskState = document.getElementById("empty-task-state");
-
+let editTask = null;
 taskForm.addEventListener("submit", function (event) {
 
     event.preventDefault();
@@ -30,17 +30,21 @@ taskForm.addEventListener("submit", function (event) {
                 <span>${priority}</span>
             </div>
 
-        </div>
-
-        <div class="task-actions">
+<div class="task-actions">
 
     <button class="complete-button">
         Complete
     </button>
 
+    <button class="edit-button">
+        Edit
+    </button>
+
     <button class="delete-button">
         Delete
     </button>
+
+</div>
 
 </div>
     `;
@@ -81,7 +85,49 @@ taskList.addEventListener("click", function (event) {
             button.textContent = "Complete";
         }
     }
+if (event.target.classList.contains("edit-button")) {
 
+    const task = event.target.closest(".task-card");
+
+    const title = task.querySelector("h3").textContent;
+    const description = task.querySelector("p").textContent;
+
+    const details = task.querySelectorAll(".task-details span");
+
+    const subject = details[0].textContent;
+    const deadline = details[1].textContent;
+    const priority = details[2].textContent;
+
+    document.getElementById("task-title").value = title;
+    document.getElementById("task-description").value = description;
+    document.getElementById("task-subject").value = subject;
+    document.getElementById("task-deadline").value = deadline;
+    document.getElementById("task-priority").value = priority;
+if (editTask) {
+
+    editTask.querySelector("h3").textContent = title;
+    editTask.querySelector("p").textContent = description;
+
+    const details = editTask.querySelectorAll(".task-details span");
+
+    details[0].textContent = subject;
+    details[1].textContent = deadline;
+    details[2].textContent = priority;
+
+    editTask = null;
+
+    document.querySelector("#task-form .primary-button").textContent =
+        "Add Task";
+
+    taskForm.reset();
+
+    return;
+}
+    editTask = task;
+
+    document.querySelector("#task-form .primary-button").textContent =
+        "Update Task";
+}
 
     if (event.target.classList.contains("delete-button")) {
 
