@@ -1,107 +1,403 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    
+    <title>StudyFlow</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <h1>Smart Student Productivity Management System</h1>
-    <p>Organize your academic tasks, deadlines and study sessions.</p>
+   
+
+    <nav class="landing-navbar">
+
+        <div class="logo">
+            StudyFlow 
+        </div>
+
+        <div class="landing-nav-links">
+            <a href ="#dashboard.html">Dashboard</a>
+            <a href ="home.html">Home</a>
+            <a href ="profile.html">Profile</a>
+            <a href ="tasks.html">Tasks</a>
+            <a href ="#">Subjects </a>
+            <a href ="#">Study Sessions</a>
+            <a href="#">Planner</a>
+            <a href ="#">Timer</a> 
+            <a href ="#">Progress</a>           
+            <a href="#how-it-works">StudyFlow</a>
+            <a href="#features">Features</a>
+            <a href="login.html">Login</a>
+
+            </a>
+        </div>
+
+    </nav>
 
 
-<nav class="navbar">
-    <div class="logo"></div>
+    <main>
 
-    <div class="nav-links">
-         <a href ="dashboard.html"></a>
-        <a href ="login.html" >Login </a>
-        <a href = "profile.html">Profile</a>
-        <a href="#">Home</a>
-        <a href="#">Tasks</a>
-        <a href ="#">Pomodoro Timer</a>
-        <a href="#">Subjects</a>
-        <a href ="#">Study Planner</a>
-        <a href = "#">Resources </a>
-        <a href="#">Study Sessions</a>
-       
-       
-    </div>
-</nav>
-<main>
-    <section class="hero">
-        <p class="tagline">  Your time. Your focus. Your progress. </p> 
+        <!-- Hero -->
 
-         
-           
-        <p class="hero-text">
-            Organize tasks, track deadlines, manage study sessions,
-            and understand your productivity in one place.
+        <section class="hero-section">
+
+            <div class="hero-content">
+
+                <p class="hero-label">
+                    YOUR ACADEMIC WORKSPACE
+                </p>
+
+                <h1>
+                    Plan what matters.<br>
+                    Focus on what comes next.
+                </h1>
+
+                <p class="hero-description">
+                    Organize your academic workload, decide what needs
+                    your attention, and track the study time you actually spend.
+                </p>
+
+                <div class="hero-actions">
+
+                    <a href="register.html" class="primary-button">
+                        Create Your Workspace
+                    </a>
+
+                    <a href="#how-it-works" class="text-button">
+                        See how it works →
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Mini productivity preview -->
+
+            <div class="product-preview">
+
+                <div class="preview-header">
+
+                    <div>
+                        <p class="preview-label">
+                            TODAY'S FOCUS
+                        </p>
+
+                        <h2>
+                            Your academic day
+                        </h2>
+                    </div>
+
+                    <span class="preview-date">
+                        Today
+                    </span>
+
+                </div>
+
+
+                <div class="focus-item">
+
+                    <div class="focus-main">
+
+                        <span class="focus-dot"></span>
+
+                        <div>
+                            <h3>DBMS Assignment</h3>
+                            <p>Due tomorrow</p>
+                        </div>
+
+                    </div>
+
+                    <span class="priority high">
+                        HIGH
+                    </span>
+
+                </div>
+
+
+                <div class="focus-item">
+
+                    <div class="focus-main">
+
+                        <span class="focus-dot"></span>
+
+                        <div>
+                            <h3>DSA Practice</h3>
+                            <p>45 min planned</p>
+                        </div>
+
+                    </div>
+
+                    <span class="priority planned">
+                        PLANNED
+                    </span>
+
+                </div>
+
+
+                <div class="focus-item">
+
+                    <div class="focus-main">
+
+                        <span class="focus-dot"></span>
+
+                        <div>
+                            <h3>Digital Electronics</h3>
+                            <p>30 min study session</p>
+                        </div>
+
+                    </div>
+
+                    <span class="priority study">
+                        STUDY
+                    </span>
+
+                </div>
+
+
+                <div class="preview-footer">
+
+                    <span>
+                        3 things need your attention
+                    </span>
+
+                    <span>
+                        View dashboard →
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- How it works -->
+
+        <section class="flow-section" id="how-it-works">
+
+            <div class="section-intro">
+
+                <p class="section-label">
+                    HOW STUDYFLOW WORKS
+                </p>
+
+                <h2>
+                    From workload to a clearer study day.
+                </h2>
+
+                <p>
+                    StudyFlow connects the things you need to do with
+                    the time you actually spend studying.
+                </p>
+
+            </div>
+
+
+            <div class="flow-grid">
+
+                <div class="flow-step">
+
+                    <span class="step-number">
+                        01
+                    </span>
+
+                    <h3>
+                        Plan
+                    </h3>
+
+                    <p>
+                        Add assignments, deadlines, priorities,
+                        and the subjects they belong to.
+                    </p>
+
+                </div>
+
+
+                <div class="flow-line"></div>
+
+
+                <div class="flow-step">
+
+                    <span class="step-number">
+                        02
+                    </span>
+
+                    <h3>
+                        Focus
+                    </h3>
+
+                    <p>
+                        Use your workload to decide what deserves
+                        attention and record your study sessions.
+                    </p>
+
+                </div>
+
+
+                <div class="flow-line"></div>
+
+
+                <div class="flow-step">
+
+                    <span class="step-number">
+                        03
+                    </span>
+
+                    <h3>
+                        Progress
+                    </h3>
+
+                    <p>
+                        See completed work, study time, and
+                        patterns in your academic activity.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Features -->
+
+        <section class="features-section" id="features">
+
+            <div class="section-intro">
+
+                <p class="section-label">
+                    BUILT AROUND YOUR ACADEMIC DAY
+                </p>
+
+                <h2>
+                    Everything works together.
+                </h2>
+
+            </div>
+
+
+            <div class="feature-grid">
+
+                <article class="feature-item">
+
+                    <span class="feature-number">
+                        01
+                    </span>
+
+                    <h3>
+                        Tasks & Deadlines
+                    </h3>
+
+                    <p>
+                        Keep assignments and academic work organized
+                        with deadlines, subjects, priorities, and status.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-item">
+
+                    <span class="feature-number">
+                        02
+                    </span>
+
+                    <h3>
+                        Study Planner
+                    </h3>
+
+                    <p>
+                        Turn your workload into a practical plan
+                        for when and what to study.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-item">
+
+                    <span class="feature-number">
+                        03
+                    </span>
+
+                    <h3>
+                        Study Sessions
+                    </h3>
+
+                    <p>
+                        Record the time you actually spend studying
+                        instead of relying only on planned schedules.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-item">
+
+                    <span class="feature-number">
+                        04
+                    </span>
+
+                    <h3>
+                        Progress & Insights
+                    </h3>
+
+                    <p>
+                        Understand completed work, study activity,
+                        and what may need your attention next.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- Final CTA -->
+
+        <section class="final-section">
+
+            <p class="section-label">
+                START WITH WHAT YOU HAVE
+            </p>
+
+            <h2>
+                Your workload doesn't have to stay in your head.
+            </h2>
+
+            <p>
+                Put your tasks, study time, and progress in one place.
+            </p>
+
+            <a href="register.html" class="primary-button">
+                Create Your Workspace
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <footer class="landing-footer">
+
+        <div>
+            <strong>StudyFlow</strong>
+            <span>Academic productivity, made clearer.</span>
+        </div>
+
+        <p>
+            © 2026 StudyFlow
         </p>
 
-        
+    </footer>
 
-<section class="overview" id="overview">
-    <p class="section-label"> YOUR PRODUCTIVITY SPACE</p>
-
-    <h2>Everything you need to stay on track.</h2>
-
-    <p>
-        Manage your academic tasks, deadlines, subjects,
-        and study sessions from one place.
-    </p>
-</section>
-<section class="overview">
-
-    <p class="section-label">WHAT SSPMS BRINGS TOGETHER</p>
-
-    <h2>Your Academic Day, In One Place.</h2>
-
-    <p class="overview-text">
-        Keep track of the things that compete for your time —
-        from assignments and deadlines to study sessions and progress.
-    </p>
-
-    <div class="overview-grid">
-
-        <div class="overview-card">
-            <h3>Tasks</h3>
-            <p>
-                Keep assignments and academic work organized
-                with deadlines, priorities, and status.
-            </p>
-        </div>
-
-        <div class="overview-card">
-            <h3>Study Sessions</h3>
-            <p>
-                Record your study time and see where your
-                time is actually going.
-            </p>
-        </div>
-
-        <div class="overview-card">
-            <h3>Progress</h3>
-            <p>
-                Track completed work and understand your
-                productivity over time.
-            </p>
-        </div>
-
-    </div>
-
-</section>
-    </section>
-</main>
-
-
-
-
-<script src="script.js"></script>
 </body>
+
 </html>
