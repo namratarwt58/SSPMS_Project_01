@@ -48,10 +48,14 @@ Day 2:
 -Implemented Responsiveness.
 
  ## Current Progress:
- -Task Module CRUD completed 
+ -Task Module CRUD designed.
  -Tested for responsiveness.
  ## Current Status 
  -1st Module Finished: Tasks Section
  -Edit,Create,Update,Delete
  -Set Priorities.
+ ## Day 4:
+ -Added EDIT feature to existing tasks.
+ -No storage yet.
+ -Updated Task Module
 
