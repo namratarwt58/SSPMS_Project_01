@@ -1,6 +1,3 @@
-// =========================
-// TASKS MODULE
-// =========================
 
 const taskForm = document.getElementById("task-form");
 
@@ -13,7 +10,7 @@ if (taskForm) {
     let editTask = null;
 
 
-    // ADD / UPDATE TASK
+    
 
     taskForm.addEventListener("submit", function (event) {
 
@@ -35,7 +32,7 @@ if (taskForm) {
             document.getElementById("task-priority").value;
 
 
-        // UPDATE EXISTING TASK
+    
 
         if (editTask) {
 
@@ -62,7 +59,7 @@ if (taskForm) {
         }
 
 
-        // CREATE NEW TASK
+      
 
         const task = document.createElement("div");
 
@@ -112,11 +109,11 @@ if (taskForm) {
     });
 
 
-    // TASK EDIT / COMPLETE / DELETE
+    
 
     taskList.addEventListener("click", function (event) {
 
-        // EDIT
+        
 
         if (event.target.classList.contains("edit-button")) {
 
@@ -149,7 +146,7 @@ if (taskForm) {
         }
 
 
-        // COMPLETE
+       
 
         if (event.target.classList.contains("complete-button")) {
 
@@ -197,7 +194,7 @@ if (taskForm) {
     });
 
 
-    // TASK COUNTER
+   
 
     function updateTaskCount() {
 
@@ -213,9 +210,7 @@ if (taskForm) {
 }
 
 
-// =========================
-// SUBJECTS MODULE
-// =========================
+
 
 const subjectForm = document.getElementById("subject-form");
 
@@ -236,7 +231,7 @@ if (subjectForm) {
     let editSubject = null;
 
 
-    // ADD / UPDATE SUBJECT
+  
 
     subjectForm.addEventListener("submit", function (event) {
 
@@ -252,7 +247,7 @@ if (subjectForm) {
             document.getElementById("subject-description").value.trim();
 
 
-        // UPDATE EXISTING SUBJECT
+   
 
         if (editSubject) {
 
@@ -279,7 +274,7 @@ if (subjectForm) {
         }
 
 
-        // CREATE NEW SUBJECT
+
 
         const subject =
             document.createElement("div");
@@ -388,7 +383,7 @@ if (subjectForm) {
     });
 
 
-    // SUBJECT COUNTER
+  
 
     function updateSubjectCount() {
 
