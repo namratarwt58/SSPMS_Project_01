@@ -1,1 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Subjects | StudyFlow</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav class="app-navbar">
+
+        <div class="logo">
+            StudyFlow
+        </div>
+
+        <div class="app-nav-links">
+
+            <a href="dashboard.html">Dashboard</a>
+            <a href="tasks.html">Tasks</a>
+            <a href="#">Planner</a>
+            <a href="subjects.html" class="active">Subjects</a>
+            <a href="#">Study</a>
+            <a href="#">Progress</a>
+            <a href="#">Resources</a>
+            <a href="profile.html">Profile</a>
+
+        </div>
+
+    </nav>
+
+
+    <main class="subjects-page">
+
+        <header class="subjects-header">
+
+            <div>
+
+                <p class="section-label">
+                    ACADEMIC ORGANIZATION
+                </p>
+
+                <h1>
+                    Subjects
+                </h1>
+
+                <p>
+                    Organize your academic work by the subjects
+                    you are currently studying.
+                </p>
+
+            </div>
+
+
+            <div class="subject-summary">
+
+                <strong id="subject-count">
+                    0
+                </strong>
+
+                <span>
+                    Subjects
+                </span>
+
+            </div>
+
+        </header>
+
+
+        <section class="subjects-workspace">
+
+
+            <!-- ADD SUBJECT -->
+
+            <div class="subject-form-panel">
+
+                <p class="panel-label">
+                    ADD NEW
+                </p>
+
+                <h2>
+                    Add a subject
+                </h2>
+
+                <p class="panel-description">
+                    Add a subject to organize your academic workload.
+                </p>
+
+
+                <form id="subject-form">
+
+                    <div class="form-group">
+
+                        <label for="subject-name">
+                            Subject name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="subject-name"
+                            placeholder="e.g. Database Management Systems"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="subject-code">
+                            Subject code
+                        </label>
+
+                        <input
+                            type="text"
+                            id="subject-code"
+                            placeholder="e.g. CSE301"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="subject-description">
+                            Description
+                        </label>
+
+                        <textarea
+                            id="subject-description"
+                            rows="4"
+                            placeholder="Optional description"
+                        ></textarea>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                    >
+                        Add Subject
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- SUBJECT LIST -->
+
+            <div class="subject-list-panel">
+
+                <div class="subject-list-header">
+
+                    <div>
+
+                        <p class="panel-label">
+                            YOUR SUBJECTS
+                        </p>
+
+                        <h2>
+                            Current subjects
+                        </h2>
+
+                    </div>
+
+                    <span id="subject-status">
+                        0 subjects
+                    </span>
+
+                </div>
+
+
+                <div id="subject-list">
+
+                    <div
+                        class="subject-empty"
+                        id="empty-subject-state"
+                    >
+
+                        <div class="empty-mark">
+                            —
+                        </div>
+
+                        <h3>
+                            No subjects yet.
+                        </h3>
+
+                        <p>
+                            Add your current subjects and
+                            they will appear here.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
