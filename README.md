@@ -64,5 +64,17 @@ Day 2:
 
  ## Current Status:
  -Task Module completed.
- 
+
+ ## Day 5:
+ -2nd Module Finished
+ -CRUD operations performed
+ -Tested for responsiveness
+
+ ## Current Progress
+ -Subject Module with Add Button
+ -No storage yet
+
+ ## Current Status
+ - Subject Module Finished
+ - 
 
