@@ -401,3 +401,231 @@ if (subjectForm) {
     }
 
 }
+// =========================
+// PLANNER MODULE
+// =========================
+
+const plannerForm = document.getElementById("planner-form");
+
+if (plannerForm) {
+
+    const plannerList = document.getElementById("planner-list");
+    const plannerCount = document.getElementById("planner-count");
+    const plannerStatus = document.getElementById("planner-status");
+    const emptyPlannerState = document.getElementById("empty-planner-state");
+
+    let editPlanner = null;
+
+
+    // =========================
+    // ADD / UPDATE PLAN
+    // =========================
+
+    plannerForm.addEventListener("submit", function (event) {
+
+        event.preventDefault();
+
+        const subject = document.getElementById("planner-subject").value;
+        const topic = document.getElementById("planner-topic").value.trim();
+        const date = document.getElementById("planner-date").value;
+        const time = document.getElementById("planner-time").value;
+        const duration = document.getElementById("planner-duration").value;
+
+
+        // Check required fields
+        if (!subject || !topic || !date || !time || !duration) {
+            alert("Please fill all planner fields.");
+            return;
+        }
+
+
+        // =========================
+        // UPDATE EXISTING PLAN
+        // =========================
+
+        if (editPlanner) {
+
+            editPlanner.querySelector(".planner-time").textContent = time;
+
+            editPlanner.querySelector("h3").textContent = topic;
+
+            const details =
+                editPlanner.querySelectorAll(".planner-details span");
+
+            details[0].textContent = subject;
+            details[1].textContent = date;
+            details[2].textContent = duration;
+
+            editPlanner = null;
+
+            document.querySelector(
+                "#planner-form .primary-button"
+            ).textContent = "Add to Planner";
+
+            plannerForm.reset();
+
+            return;
+        }
+
+
+        // =========================
+        // CREATE NEW PLAN
+        // =========================
+
+        const plan = document.createElement("div");
+
+        plan.className = "planner-item";
+
+
+        plan.innerHTML = `
+            <div class="planner-time">
+                ${time}
+            </div>
+
+            <div class="planner-session">
+
+                <h3>
+                    ${topic}
+                </h3>
+
+                <p>
+                    Study session
+                </p>
+
+                <div class="planner-details">
+
+                    <span>
+                        ${subject}
+                    </span>
+
+                    <span>
+                        ${date}
+                    </span>
+
+                    <span>
+                        ${duration}
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="planner-actions">
+
+                <button
+                    type="button"
+                    class="edit-button">
+                    Edit
+                </button>
+
+                <button
+                    type="button"
+                    class="delete-button">
+                    Delete
+                </button>
+
+            </div>
+        `;
+
+
+        // Hide empty state
+        emptyPlannerState.style.display = "none";
+
+
+        // Add plan to list
+        plannerList.appendChild(plan);
+
+
+        // Update counter
+        updatePlannerCount();
+
+
+        // Clear form
+        plannerForm.reset();
+
+    });
+
+
+    // =========================
+    // EDIT / DELETE
+    // =========================
+
+    plannerList.addEventListener("click", function (event) {
+
+        // EDIT
+        if (event.target.classList.contains("edit-button")) {
+
+            const plan =
+                event.target.closest(".planner-item");
+
+            const details =
+                plan.querySelectorAll(".planner-details span");
+
+
+            document.getElementById("planner-subject").value =
+                details[0].textContent.trim();
+
+            document.getElementById("planner-topic").value =
+                plan.querySelector("h3").textContent.trim();
+
+            document.getElementById("planner-date").value =
+                details[1].textContent.trim();
+
+            document.getElementById("planner-time").value =
+                plan.querySelector(".planner-time").textContent.trim();
+
+            document.getElementById("planner-duration").value =
+                details[2].textContent.trim();
+
+
+            editPlanner = plan;
+
+
+            document.querySelector(
+                "#planner-form .primary-button"
+            ).textContent = "Update Plan";
+        }
+
+
+        // DELETE
+        if (event.target.classList.contains("delete-button")) {
+
+            const plan =
+                event.target.closest(".planner-item");
+
+            plan.remove();
+
+            updatePlannerCount();
+
+
+            // Show empty state again
+            if (
+                document.querySelectorAll(".planner-item").length === 0
+            ) {
+                emptyPlannerState.style.display = "block";
+            }
+        }
+
+    });
+
+
+    // =========================
+    // UPDATE COUNTER
+    // =========================
+
+    function updatePlannerCount() {
+
+        const plans =
+            document.querySelectorAll(".planner-item");
+
+        const count = plans.length;
+
+        plannerCount.textContent = count;
+
+        plannerStatus.textContent =
+            count === 1
+                ? "1 session"
+                : count + " sessions";
+    }
+
+}
