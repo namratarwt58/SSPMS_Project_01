@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Study Planner | StudyFlow</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <nav class="app-navbar">
+
+        <div class="logo">
+            StudyFlow
+        </div>
+
+        <div class="app-nav-links">
+
+            <a href="dashboard.html">Dashboard</a>
+
+            <a href="tasks.html">Tasks</a>
+
+            <a href="planner.html" class="active">
+                Planner
+            </a>
+
+            <a href="subjects.html">
+                Subjects
+            </a>
+
+            <a href="#">Study</a>
+
+            <a href="#">Progress</a>
+
+            <a href="#">Resources</a>
+
+            <a href="profile.html">
+                Profile
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- PLANNER PAGE -->
+
+    <main class="planner-page">
+
+
+        <!-- PAGE HEADER -->
+
+        <header class="planner-header">
+
+            <div>
+
+                <p class="section-label">
+                    STUDY PLANNING
+                </p>
+
+                <h1>
+                    Study Planner
+                </h1>
+
+                <p>
+                    Plan what you want to study and when you want to study it.
+                </p>
+
+            </div>
+
+
+            <div class="planner-summary">
+
+                <strong id="planner-count">
+                    0
+                </strong>
+
+                <span>
+                    Planned sessions
+                </span>
+
+            </div>
+
+        </header>
+
+
+        <!-- PLANNER WORKSPACE -->
+
+        <section class="planner-workspace">
+
+
+            <!-- ADD PLAN -->
+
+            <div class="planner-form-panel">
+
+                <p class="panel-label">
+                    PLAN A SESSION
+                </p>
+
+                <h2>
+                    Add study plan
+                </h2>
+
+                <p class="panel-description">
+                    Decide what you want to study and schedule time for it.
+                </p>
+
+
+                <form id="planner-form">
+
+
+                    <!-- SUBJECT -->
+
+                    <div class="form-group">
+
+                        <label for="planner-subject">
+                            Subject
+                        </label>
+
+                        <select id="planner-subject" required>
+
+                            <option value="">
+                                Select subject
+                            </option>
+
+                            <option value="DBMS">
+                                DBMS
+                            </option>
+
+                            <option value="Core Java">
+                                Core Java
+                            </option>
+
+                            <option value="DSA">
+                                DSA
+                            </option>
+
+                            <option value="Operating Systems">
+                                Operating Systems
+                            </option>
+
+                            <option value="Digital Electronics">
+                                Digital Electronics
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- WHAT TO STUDY -->
+
+                    <div class="form-group">
+
+                        <label for="planner-topic">
+                            What to study
+                        </label>
+
+                        <input
+                            type="text"
+                            id="planner-topic"
+                            placeholder="e.g. Normalization"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- DATE -->
+
+                    <div class="form-group">
+
+                        <label for="planner-date">
+                            Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="planner-date"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- TIME + DURATION -->
+
+                    <div class="planner-form-row">
+
+
+                        <div class="form-group">
+
+                            <label for="planner-time">
+                                Start time
+                            </label>
+
+                            <input
+                                type="time"
+                                id="planner-time"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="planner-duration">
+                                Duration
+                            </label>
+
+                            <select
+                                id="planner-duration"
+                                required
+                            >
+
+                                <option value="">
+                                    Select
+                                </option>
+
+                                <option value="30 min">
+                                    30 min
+                                </option>
+
+                                <option value="45 min">
+                                    45 min
+                                </option>
+
+                                <option value="60 min">
+                                    60 min
+                                </option>
+
+                                <option value="90 min">
+                                    90 min
+                                </option>
+
+                                <option value="120 min">
+                                    120 min
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="primary-button"
+                    >
+                        Add to Planner
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- PLANNED SESSIONS -->
+
+            <div class="planner-list-panel">
+
+
+                <div class="planner-list-header">
+
+                    <div>
+
+                        <p class="panel-label">
+                            YOUR PLAN
+                        </p>
+
+                        <h2>
+                            Planned study
+                        </h2>
+
+                    </div>
+
+                    <span id="planner-status">
+                        0 sessions
+                    </span>
+
+                </div>
+
+
+                <div id="planner-list">
+
+
+                    <!-- EMPTY STATE -->
+
+                    <div
+                        class="planner-empty"
+                        id="empty-planner-state"
+                    >
+
+                        <div class="empty-mark">
+                            —
+                        </div>
+
+                        <h3>
+                            No study plans yet.
+                        </h3>
+
+                        <p>
+                            Add your first study session and it will appear here.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
