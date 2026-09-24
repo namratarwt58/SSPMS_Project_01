@@ -76,5 +76,13 @@ Day 2:
 
  ## Current Status
  - Subject Module Finished
- - 
+ ## Day 6:
+ -3rd Module Finished
+- CRUD done
+## Current Progress 
+-Planner Module Done
+
+## Current Status
+-Developed Planner Section
+
 
