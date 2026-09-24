@@ -71,7 +71,7 @@ Day 2:
  -Tested for responsiveness
 
  ## Current Progress
- -Subject Module with Add Button
+ -Subject Module completed
  -No storage yet
 
  ## Current Status
