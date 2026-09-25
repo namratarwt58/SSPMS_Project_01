@@ -12,7 +12,9 @@
 
 <body>
 
-    <!-- Navigation -->
+    <!-- =========================
+         NAVIGATION
+         ========================= -->
 
     <nav class="app-navbar">
 
@@ -22,23 +24,50 @@
 
         <div class="app-nav-links">
 
-            <a href="dashboard.html">Dashboard</a>
-            <a href="tasks.html" class="active">Tasks</a>
-            <a href="#">Planner</a>
-            <a href="#">Subjects</a>
-            <a href="#">Study</a>
-            <a href="#">Progress</a>
-            <a href="#">Resources</a>
-            <a href="profile.html">Profile</a>
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="tasks.html" class="active">
+                Tasks
+            </a>
+
+            <a href="planner.html">
+                Planner
+            </a>
+
+            <a href="subjects.html">
+                Subjects
+            </a>
+
+            <a href="#">
+                Study
+            </a>
+
+            <a href="#">
+                Progress
+            </a>
+
+            <a href="#">
+                Resources
+            </a>
+
+            <a href="profile.html">
+                Profile
+            </a>
 
         </div>
 
     </nav>
 
 
+    <!-- =========================
+         TASK PAGE
+         ========================= -->
+
     <main class="tasks-page">
 
-        <!-- Header -->
+        <!-- PAGE HEADER -->
 
         <header class="tasks-header">
 
@@ -53,41 +82,41 @@
                 </h1>
 
                 <p>
-                    Keep track of assignments, deadlines, and the work
-                    competing for your attention.
+                    Keep track of assignments, academic work and upcoming deadlines.
                 </p>
 
             </div>
 
-
             <div class="task-summary">
 
-                <div>
-                    <strong id="task-count">0</strong>
-                    <span>Pending</span>
-                </div>
+                <strong id="task-count">
+                    0
+                </strong>
 
-                <div>
-                    <strong>0</strong>
-                    <span>Due today</span>
-                </div>
+                <span>
+                    Tasks
+                </span>
 
             </div>
 
         </header>
 
 
-        <!-- Main task workspace -->
+        <!-- =========================
+             TASK WORKSPACE
+             ========================= -->
 
         <section class="task-workspace">
 
 
-            <!-- Add task -->
+            <!-- =========================
+                 ADD TASK
+                 ========================= -->
 
             <div class="task-form-panel">
 
                 <p class="panel-label">
-                    ADD NEW
+                    ADD WORK
                 </p>
 
                 <h2>
@@ -95,12 +124,14 @@
                 </h2>
 
                 <p class="panel-description">
-                    Capture something you need to complete.
+                    Add an assignment or academic task you need to complete.
                 </p>
 
 
                 <form id="task-form">
 
+
+                    <!-- TITLE -->
 
                     <div class="form-group">
 
@@ -111,12 +142,14 @@
                         <input
                             type="text"
                             id="task-title"
-                            placeholder="e.g. Complete DBMS assignment"
+                            placeholder="e.g. DBMS Assignment"
                             required
                         >
 
                     </div>
 
+
+                    <!-- DESCRIPTION -->
 
                     <div class="form-group">
 
@@ -126,101 +159,94 @@
 
                         <textarea
                             id="task-description"
+                            placeholder="What needs to be completed?"
                             rows="4"
-                            placeholder="What needs to be done?"
                         ></textarea>
 
                     </div>
 
 
-                    <div class="task-form-row">
+                    <!-- SUBJECT -->
 
-                        <div class="form-group">
+                    <div class="form-group">
 
-                            <label for="task-subject">
-                                Subject
-                            </label>
+                        <label for="task-subject">
+                            Subject
+                        </label>
+<div class="form-group">
+   
+    <input
+        type="text"
+        id="task-subject"
+        placeholder="e.g. Computer Networks"
+        required
+    >
+</div>
 
-                            <select id="task-subject" required>
+                           
 
-                                <option value="">
-                                    Select
-                                </option>
-
-                                <option value="DBMS">
-                                    DBMS
-                                </option>
-
-                                <option value="Java">
-                                    Java
-                                </option>
-
-                                <option value="DSA">
-                                    DSA
-                                </option>
-
-                                <option value="Operating Systems">
-                                    Operating Systems
-                                </option>
-
-                                <option value="Digital Electronics">
-                                    Digital Electronics
-                                </option>
-
-                            </select>
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="task-deadline">
-                                Deadline
-                            </label>
-
-                            <input
-                                type="date"
-                                id="task-deadline"
-                                required
-                            >
-
-                        </div>
-
-
-                        <div class="form-group">
-
-                            <label for="task-priority">
-                                Priority
-                            </label>
-
-                            <select id="task-priority" required>
-
-                                <option value="">
-                                    Select
-                                </option>
-
-                                <option value="Low">
-                                    Low
-                                </option>
-
-                                <option value="Medium">
-                                    Medium
-                                </option>
-
-                                <option value="High">
-                                    High
-                                </option>
-
-                            </select>
-
-                        </div>
+                        </select>
 
                     </div>
 
 
+                    <!-- DEADLINE -->
+
+                    <div class="form-group">
+
+                        <label for="task-deadline">
+                            Deadline
+                        </label>
+
+                        <input
+                            type="date"
+                            id="task-deadline"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- PRIORITY -->
+
+                    <div class="form-group">
+
+                        <label for="task-priority">
+                            Priority
+                        </label>
+
+                        <select
+                            id="task-priority"
+                            required
+                        >
+
+                            <option value="">
+                                Select priority
+                            </option>
+
+                            <option value="High">
+                                High
+                            </option>
+
+                            <option value="Medium">
+                                Medium
+                            </option>
+
+                            <option value="Low">
+                                Low
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- BUTTON -->
+
                     <button
                         type="submit"
                         class="primary-button"
+                        id="task-submit-button"
                     >
                         Add Task
                     </button>
@@ -230,7 +256,9 @@
             </div>
 
 
-            <!-- Task list -->
+            <!-- =========================
+                 TASK LIST
+                 ========================= -->
 
             <div class="task-list-panel">
 
@@ -243,7 +271,7 @@
                         </p>
 
                         <h2>
-                            Current tasks
+                            Academic tasks
                         </h2>
 
                     </div>
@@ -255,7 +283,12 @@
                 </div>
 
 
+                <!-- TASKS WILL APPEAR HERE -->
+
                 <div id="task-list">
+
+
+                    <!-- EMPTY STATE -->
 
                     <div
                         class="task-empty"
@@ -267,12 +300,11 @@
                         </div>
 
                         <h3>
-                            Nothing here yet.
+                            No tasks yet.
                         </h3>
 
                         <p>
-                            Add your academic work and it will
-                            appear here.
+                            Add your first academic task to start managing your workload.
                         </p>
 
                     </div>
@@ -285,6 +317,8 @@
 
     </main>
 
+
+    <!-- JAVASCRIPT -->
 
     <script src="script.js"></script>
 
