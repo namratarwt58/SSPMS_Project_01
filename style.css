@@ -330,7 +330,33 @@ body {
     color: var(--primary);
     border-color: var(--primary);
 }
+.complete-button,
+.edit-button,
+.delete-button {
+    padding: 8px 11px;
+    background-color: transparent;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--text);
+}
 
+.complete-button:hover {
+    border-color: var(--success);
+    color: var(--success);
+}
+
+
+.delete-button {
+    color: var(--danger);
+}
+
+.delete-button:hover {
+    border-color: var(--danger);
+    color: var(--danger);
+}
 /* Task form */
 
 .task-form-section {
@@ -1734,7 +1760,38 @@ body {
     box-shadow: 0 0 0 2px var(--primary-light);
 }
 
+.inline-subject-form {
+    margin-top: 18px;
+    padding: 18px;
+    background: var(--surface-dark);
+    border: 1px solid var(--border);
+}
 
+.inline-subject-form .form-group {
+    margin-bottom: 16px;
+}
+
+.inline-subject-form .form-group:last-of-type {
+    margin-bottom: 18px;
+}
+
+.secondary-button {
+    appearance: none;
+    padding: 9px 14px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    color: var(--text);
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.secondary-button:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
 /* ---------- Three fields ---------- */
 
 .task-form-row {
@@ -2023,10 +2080,6 @@ body {
     color: var(--primary) !important;
 }
 
-    background: transparent !important;
-    border-color: var(--primary) !important;
-    color: var(--primary) !important;
-}
 /* =========================
    SUBJECTS PAGE
 ========================= */
@@ -2243,7 +2296,8 @@ body {
         width: 100%;
     }
 
-}/* =========================
+}
+/* =========================
    PLANNER PAGE
    ========================= */
 
@@ -2502,4 +2556,3 @@ body {
     }
 
 }
-
