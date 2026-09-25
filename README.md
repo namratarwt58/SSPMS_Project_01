@@ -86,3 +86,12 @@ Day 2:
 -Developed Planner Section
 
 
+## Day 7:
+## Current Progress: 
+-Refined Scope
+-Made it student-centric rather than cse-centric
+-Updated Add Button functionality
+-Updated all modules
+
+## Current Status
+-Refined Tasks, Subject and Planner modules succcessfully
