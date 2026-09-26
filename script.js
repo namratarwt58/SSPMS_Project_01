@@ -730,11 +730,17 @@ if (taskForm) {
 /* =====================================================
    PLANNER MODULE
 ===================================================== */
+// =====================================================
+// STUDYFLOW - STUDY PLANNER
+// =====================================================
 
-const plannerForm =
-    document.getElementById("planner-form");
+const plannerForm = document.getElementById("planner-form");
 
 if (plannerForm) {
+
+    // -------------------------------------------------
+    // ELEMENTS
+    // -------------------------------------------------
 
     const plannerList =
         document.getElementById("planner-list");
@@ -745,22 +751,52 @@ if (plannerForm) {
     const plannerStatus =
         document.getElementById("planner-status");
 
-    const emptyPlannerState =
-        document.getElementById("empty-planner-state");
+
+    // -------------------------------------------------
+    // LOCAL STORAGE
+    // -------------------------------------------------
 
     const PLANNER_KEY = "studyflow_planner";
 
+
+    // Used when editing an existing plan
     let editingPlannerId = null;
 
 
+    // -------------------------------------------------
+    // GET PLANS FROM LOCAL STORAGE
+    // -------------------------------------------------
+
     function getPlans() {
 
-        return JSON.parse(
-            localStorage.getItem(PLANNER_KEY)
-        ) || [];
+        const storedPlans =
+            localStorage.getItem(PLANNER_KEY);
+
+        if (!storedPlans) {
+            return [];
+        }
+
+        try {
+
+            return JSON.parse(storedPlans);
+
+        } catch (error) {
+
+            console.error(
+                "Could not read planner data:",
+                error
+            );
+
+            return [];
+
+        }
 
     }
 
+
+    // -------------------------------------------------
+    // SAVE PLANS TO LOCAL STORAGE
+    // -------------------------------------------------
 
     function savePlans(plans) {
 
@@ -772,82 +808,165 @@ if (plannerForm) {
     }
 
 
-    function renderPlanner() {
+    // -------------------------------------------------
+    // UPDATE PLANNER COUNT
+    // -------------------------------------------------
 
-        const plans = getPlans();
+    function updatePlannerCount(plans) {
 
-        plannerList.innerHTML = "";
+        plannerCount.textContent = plans.length;
 
 
         if (plans.length === 0) {
 
-            emptyPlannerState.style.display = "block";
+            plannerStatus.textContent =
+                "No sessions";
+
+        } else if (plans.length === 1) {
+
+            plannerStatus.textContent =
+                "1 session";
 
         } else {
 
-            emptyPlannerState.style.display = "none";
-
-
-            plans.forEach(function (plan) {
-
-                const item =
-                    document.createElement("div");
-
-                item.className = "planner-item";
-
-
-                item.innerHTML = `
-
-                    <div class="planner-time">
-                        ${plan.time}
-                    </div>
-
-                    <div class="planner-session">
-
-                        <h3>${plan.topic}</h3>
-
-                        <p>Study session</p>
-
-                        <div class="planner-details">
-
-                            <span>${plan.subject}</span>
-
-                            <span>${plan.date}</span>
-
-                            <span>${plan.duration}</span>
-
-                        </div>
-
-                    </div>
-
-                    <div class="planner-actions">
-
-                        <button
-                            type="button"
-                            class="edit-button"
-                            data-id="${plan.id}"
-                        >
-                            Edit
-                        </button>
-
-                        <button
-                            type="button"
-                            class="delete-button"
-                            data-id="${plan.id}"
-                        >
-                            Delete
-                        </button>
-
-                    </div>
-
-                `;
-
-
-                plannerList.appendChild(item);
-
-            });
+            plannerStatus.textContent =
+                plans.length + " sessions";
 
         }
+
+    }
+
+
+    // -------------------------------------------------
+    // RENDER EMPTY STATE
+    // -------------------------------------------------
+
+    function renderEmptyState() {
+
+        plannerList.innerHTML = `
+
+            <div
+                class="planner-empty"
+                id="empty-planner-state"
+            >
+
+                <div class="empty-mark">
+                    —
+                </div>
+
+                <h3>
+                    No study plans yet.
+                </h3>
+
+                <p>
+                    Add your first study session and it will appear here.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    // -------------------------------------------------
+    // RENDER PLANNER
+    // -------------------------------------------------
+
+    function renderPlanner() {
+
+        const plans = getPlans();
+
+
+        // Clear current list
+        plannerList.innerHTML = "";
+
+
+        // No plans
+        if (plans.length === 0) {
+
+            renderEmptyState();
+
+            updatePlannerCount(plans);
+
+            return;
+
+        }
+
+
+        // Display every plan
+        plans.forEach(function (plan) {
+
+            const item =
+                document.createElement("div");
+
+            item.className = "planner-item";
+
+
+            item.innerHTML = `
+
+                <div class="planner-time">
+                    ${plan.time}
+                </div>
+
+
+                <div class="planner-session">
+
+                    <h3>
+                        ${plan.topic}
+                    </h3>
+
+                    <p>
+                        Study session
+                    </p>
+
+
+                    <div class="planner-details">
+
+                        <span>
+                            ${plan.subject}
+                        </span>
+
+                        <span>
+                            ${plan.date}
+                        </span>
+
+                        <span>
+                            ${plan.duration}
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="planner-actions">
+
+                    <button
+                        type="button"
+                        class="edit-button"
+                        data-id="${plan.id}"
+                    >
+                        Edit
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="delete-button"
+                        data-id="${plan.id}"
+                    >
+                        Delete
+                    </button>
+
+                </div>
+
+            `;
+
+
+            plannerList.appendChild(item);
+
+        });
 
 
         updatePlannerCount(plans);
@@ -855,243 +974,384 @@ if (plannerForm) {
     }
 
 
-    function updatePlannerCount(plans) {
+    // -------------------------------------------------
+    // ADD / UPDATE PLAN
+    // -------------------------------------------------
 
-        plannerCount.textContent =
-            plans.length;
+    plannerForm.addEventListener(
+        "submit",
+        function (event) {
 
-
-        plannerStatus.textContent =
-            plans.length === 0
-                ? "No sessions"
-                : plans.length === 1
-                    ? "1 session"
-                    : plans.length + " sessions";
-
-    }
+            event.preventDefault();
 
 
-    /* ADD / UPDATE PLAN */
+            // -----------------------------------------
+            // GET FORM VALUES
+            // -----------------------------------------
 
-    plannerForm.addEventListener("submit", function (event) {
-
-        event.preventDefault();
-
-
-        const subject =
-            document.getElementById("planner-subject")
-                .value;
-
-        const topic =
-            document.getElementById("planner-topic")
-                .value
-                .trim();
-
-        const date =
-            document.getElementById("planner-date")
-                .value;
-
-        const time =
-            document.getElementById("planner-time")
-                .value;
-
-        const duration =
-            document.getElementById("planner-duration")
-                .value;
+            const subject =
+                document
+                    .getElementById("planner-subject")
+                    .value
+                    .trim();
 
 
-        if (
-            !subject ||
-            !topic ||
-            !date ||
-            !time ||
-            !duration
-        ) {
-
-            alert("Please fill all planner fields.");
-
-            return;
-
-        }
+            const topic =
+                document
+                    .getElementById("planner-topic")
+                    .value
+                    .trim();
 
 
-        const plans = getPlans();
+            const date =
+                document
+                    .getElementById("planner-date")
+                    .value;
 
 
-        /* UPDATE */
-
-        if (editingPlannerId !== null) {
-
-            const plan =
-                plans.find(function (item) {
-
-                    return item.id === editingPlannerId;
-
-                });
+            const time =
+                document
+                    .getElementById("planner-time")
+                    .value;
 
 
-            if (plan) {
+            const duration =
+                document
+                    .getElementById("planner-duration")
+                    .value;
 
-                plan.subject = subject;
-                plan.topic = topic;
-                plan.date = date;
-                plan.time = time;
-                plan.duration = duration;
+
+            // -----------------------------------------
+            // VALIDATION
+            // -----------------------------------------
+
+            if (
+                subject === "" ||
+                topic === "" ||
+                date === "" ||
+                time === "" ||
+                duration === ""
+            ) {
+
+                alert(
+                    "Please fill all planner fields."
+                );
+
+                return;
 
             }
 
 
+            // -----------------------------------------
+            // GET EXISTING PLANS
+            // -----------------------------------------
+
+            const plans = getPlans();
+
+
+            // -----------------------------------------
+            // UPDATE EXISTING PLAN
+            // -----------------------------------------
+
+            if (editingPlannerId !== null) {
+
+                const plan =
+                    plans.find(function (item) {
+
+                        return item.id === editingPlannerId;
+
+                    });
+
+
+                if (plan) {
+
+                    plan.subject = subject;
+
+                    plan.topic = topic;
+
+                    plan.date = date;
+
+                    plan.time = time;
+
+                    plan.duration = duration;
+
+                }
+
+
+                savePlans(plans);
+
+
+                editingPlannerId = null;
+
+
+                plannerForm.reset();
+
+
+                document.querySelector(
+                    "#planner-form .primary-button"
+                ).textContent = "Add to Planner";
+
+
+                renderPlanner();
+
+
+                return;
+
+            }
+
+
+            // -----------------------------------------
+            // CREATE NEW PLAN
+            // -----------------------------------------
+
+            const newPlan = {
+
+                id: Date.now(),
+
+                subject: subject,
+
+                topic: topic,
+
+                date: date,
+
+                time: time,
+
+                duration: duration
+
+            };
+
+
+            // Add to array
+            plans.push(newPlan);
+
+
+            // Save to localStorage
             savePlans(plans);
 
-            editingPlannerId = null;
 
-
-            document.querySelector(
-                "#planner-form .primary-button"
-            ).textContent = "Add to Planner";
-
-
+            // Clear form
             plannerForm.reset();
 
+
+            // Show updated planner
             renderPlanner();
 
-            return;
-
         }
+    );
 
 
-        /* ADD */
+    // -------------------------------------------------
+    // EDIT / DELETE
+    // -------------------------------------------------
 
-        const newPlan = {
+    plannerList.addEventListener(
+        "click",
+        function (event) {
 
-            id: Date.now(),
-
-            subject: subject,
-
-            topic: topic,
-
-            date: date,
-
-            time: time,
-
-            duration: duration
-
-        };
+            const button =
+                event.target.closest("button");
 
 
-        plans.push(newPlan);
-
-        savePlans(plans);
-
-        plannerForm.reset();
-
-        renderPlanner();
-
-    });
-
-
-    /* EDIT / DELETE */
-
-    plannerList.addEventListener("click", function (event) {
-
-        const button =
-            event.target.closest("button");
-
-
-        if (!button) {
-            return;
-        }
-
-
-        const id =
-            Number(button.dataset.id);
-
-
-        const plans =
-            getPlans();
-
-
-        /* EDIT */
-
-        if (
-            button.classList.contains(
-                "edit-button"
-            )
-        ) {
-
-            const plan =
-                plans.find(function (item) {
-
-                    return item.id === id;
-
-                });
-
-
-            if (!plan) {
+            if (!button) {
                 return;
             }
 
 
-            document.getElementById(
-                "planner-subject"
-            ).value = plan.subject;
+            const id =
+                Number(button.dataset.id);
 
 
-            document.getElementById(
-                "planner-topic"
-            ).value = plan.topic;
+            const plans =
+                getPlans();
 
 
-            document.getElementById(
-                "planner-date"
-            ).value = plan.date;
+            // -----------------------------------------
+            // EDIT
+            // -----------------------------------------
+
+            if (
+                button.classList.contains(
+                    "edit-button"
+                )
+            ) {
+
+                const plan =
+                    plans.find(function (item) {
+
+                        return item.id === id;
+
+                    });
 
 
-            document.getElementById(
-                "planner-time"
-            ).value = plan.time;
+                if (!plan) {
+                    return;
+                }
 
 
-            document.getElementById(
-                "planner-duration"
-            ).value = plan.duration;
+                document.getElementById(
+                    "planner-subject"
+                ).value = plan.subject;
 
 
-            editingPlannerId = plan.id;
+                document.getElementById(
+                    "planner-topic"
+                ).value = plan.topic;
 
 
-            document.querySelector(
-                "#planner-form .primary-button"
-            ).textContent = "Update Plan";
+                document.getElementById(
+                    "planner-date"
+                ).value = plan.date;
+
+
+                document.getElementById(
+                    "planner-time"
+                ).value = plan.time;
+
+
+                document.getElementById(
+                    "planner-duration"
+                ).value = plan.duration;
+
+
+                editingPlannerId =
+                    plan.id;
+
+
+                document.querySelector(
+                    "#planner-form .primary-button"
+                ).textContent = "Update Plan";
+
+
+                return;
+
+            }
+
+
+            // -----------------------------------------
+            // DELETE
+            // -----------------------------------------
+
+            if (
+                button.classList.contains(
+                    "delete-button"
+                )
+            ) {
+
+                const updatedPlans =
+                    plans.filter(function (item) {
+
+                        return item.id !== id;
+
+                    });
+
+
+                savePlans(updatedPlans);
+
+
+                renderPlanner();
+
+            }
 
         }
+    );
 
 
-        /* DELETE */
-
-        if (
-            button.classList.contains(
-                "delete-button"
-            )
-        ) {
-
-            const updatedPlans =
-                plans.filter(function (item) {
-
-                    return item.id !== id;
-
-                });
-
-
-            savePlans(updatedPlans);
-
-            renderPlanner();
-
-        }
-
-    });
-
+    // -------------------------------------------------
+    // INITIAL LOAD
+    // -------------------------------------------------
 
     renderPlanner();
 
+}
+
+
+// ===============================
+// DASHBOARD MODULE
+// ===============================
+
+const pendingTasksCount = document.getElementById("pending-tasks-count");
+
+if (pendingTasksCount) {
+
+    const tasks =
+        JSON.parse(localStorage.getItem("studyflow_tasks")) || [];
+
+    const pendingTasks = tasks.filter(function(task) {
+        return !task.completed;
+    });
+
+    pendingTasksCount.textContent = pendingTasks.length;
+}
+// Completed Tasks
+
+const completedTasksCount = document.getElementById("completed-tasks-count");
+
+if (completedTasksCount) {
+
+    const tasks =
+        JSON.parse(localStorage.getItem("studyflow_tasks")) || [];
+
+    const completedTasks = tasks.filter(function(task) {
+        return task.completed;
+    });
+
+    completedTasksCount.textContent = completedTasks.length;
+}
+// Due Today
+
+const dueTodayCount = document.getElementById("due-today-count");
+
+if (dueTodayCount) {
+
+    const tasks =
+        JSON.parse(localStorage.getItem("studyflow_tasks")) || [];
+
+    const today = new Date().toISOString().split("T")[0];
+
+    const dueTodayTasks = tasks.filter(function(task) {
+        return task.deadline === today && !task.completed;
+    });
+
+    dueTodayCount.textContent = dueTodayTasks.length;
+}
+// Today's Tasks
+
+const todayTasksContainer =
+    document.getElementById("today-tasks-container");
+
+if (todayTasksContainer) {
+
+    const tasks =
+        JSON.parse(localStorage.getItem("studyflow_tasks")) || [];
+
+    const today = new Date().toISOString().split("T")[0];
+
+    const todayTasks = tasks.filter(function(task) {
+        return task.deadline === today && !task.completed;
+    });
+
+    if (todayTasks.length > 0) {
+
+        todayTasksContainer.className = "today-tasks-list";
+
+        todayTasksContainer.innerHTML = "";
+
+        todayTasks.forEach(function(task) {
+
+            const taskItem = document.createElement("div");
+
+            taskItem.className = "dashboard-task-item";
+
+            taskItem.innerHTML = `
+                <div>
+                    <h3>${task.title}</h3>
+                    <p>${task.subject}</p>
+                </div>
+
+                <span>${task.priority}</span>
+            `;
+
+            todayTasksContainer.appendChild(taskItem);
+        });
+    }
 }
