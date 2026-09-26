@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Dashboard | SSPMS</title>
+    <title>Dashboard</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -38,29 +38,29 @@
         </div>
 
 
-        <section class="summary-grid">
+      <section class="summary-grid">
 
-            <div class="summary-card">
-                <p>Pending Tasks</p>
-                <h2>0</h2>
-            </div>
+    <div class="summary-card">
+        <p>Pending Tasks</p>
+        <h2 id="pending-tasks-count">0</h2>
+    </div>
 
-            <div class="summary-card">
-                <p>Due Today</p>
-                <h2>0</h2>
-            </div>
+    <div class="summary-card">
+        <p>Due Today</p>
+        <h2 id="due-today-count">0</h2>
+    </div>
 
-            <div class="summary-card">
-                <p>Completed</p>
-                <h2>0</h2>
-            </div>
+    <div class="summary-card">
+        <p>Completed</p>
+        <h2 id="completed-tasks-count">0</h2>
+    </div>
 
-            <div class="summary-card">
-                <p>Study Hours</p>
-                <h2>0h</h2>
-            </div>
+    <div class="summary-card">
+        <p>Study Hours</p>
+        <h2>0h</h2>
+    </div>
 
-        </section>
+</section>
 
 
         <section class="dashboard-section">
@@ -71,18 +71,17 @@
                 <a href="#">View All</a>
             </div>
 
-            <div class="empty-state">
-                <h3>No tasks yet</h3>
+        <div id="today-tasks-container" class="empty-state">
+    <h3>No tasks yet</h3>
 
-                <p>
-                    Add your academic tasks to start organizing your workload.
-                </p>
+    <p>
+        Add your academic tasks to start organizing your workload.
+    </p>
 
-                <button class="primary-button">
-                    Add Task
-                </button>
-            </div>
-
+    <button class="primary-button" onclick="window.location.href='tasks.html'">
+        Add Task
+    </button>
+</div>
         </section>
 
 
@@ -103,7 +102,7 @@
                 </p>
 
                 <button class="primary-button">
-                    Log Study Session
+                    Plan Session
                 </button>
 
             </div>
@@ -131,6 +130,6 @@
         </section>
 
     </main>
-
+<script src="script.js"></script>
 </body>
 </html>
