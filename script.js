@@ -1347,6 +1347,838 @@ if (todayTasksContainer) {
                     <h3>${task.title}</h3>
                     <p>${task.subject}</p>
                 </div>
+                // ========================================
+// STUDY SESSIONS MODULE
+// ========================================
+
+const PLANNER_KEY = "studyflow_planner";
+const SESSIONS_KEY = "studyflow_sessions";
+
+
+// ========================================
+// DOM ELEMENTS
+// ========================================
+
+const plannedStudyList =
+    document.getElementById("planned-study-list");
+
+const activeSessionSection =
+    document.getElementById("active-session-section");
+
+const activeSubject =
+    document.getElementById("active-subject");
+
+const activeTopic =
+    document.getElementById("active-topic");
+
+const sessionTimer =
+    document.getElementById("session-timer");
+
+const sessionStatus =
+    document.getElementById("session-status");
+
+const pauseSessionButton =
+    document.getElementById("pause-session-button");
+
+const finishSessionButton =
+    document.getElementById("finish-session-button");
+
+const sessionResultSection =
+    document.getElementById("session-result-section");
+
+const resultSessionName =
+    document.getElementById("result-session-name");
+
+const resultPlanned =
+    document.getElementById("result-planned");
+
+const resultActual =
+    document.getElementById("result-actual");
+
+const resultDifference =
+    document.getElementById("result-difference");
+
+const saveSessionButton =
+    document.getElementById("save-session-button");
+    const sessionNotes =
+    document.getElementById("session-notes");
+
+const focusRatingInputs =
+    document.querySelectorAll('input[name="focus-rating"]');
+
+const topicStatusInputs =
+    document.querySelectorAll('input[name="topic-status"]');
+
+const sessionStatusInputs =
+    document.querySelectorAll('input[name="session-status"]');
+
+const recentSessionsList =
+    document.getElementById("recent-sessions-list");
+
+const sessionCount =
+    document.getElementById("session-count");
+
+
+// ========================================
+// DATA
+// ========================================
+
+function getPlannerData() {
+
+    return JSON.parse(
+        localStorage.getItem(PLANNER_KEY)
+    ) || [];
+
+}
+
+
+function getSessions() {
+
+    return JSON.parse(
+        localStorage.getItem(SESSIONS_KEY)
+    ) || [];
+
+}
+
+
+function saveSessions(sessions) {
+
+    localStorage.setItem(
+        SESSIONS_KEY,
+        JSON.stringify(sessions)
+    );
+
+}
+
+
+// ========================================
+// DATE
+// ========================================
+
+function getToday() {
+
+    const date = new Date();
+
+    const year = date.getFullYear();
+
+    const month = String(
+        date.getMonth() + 1
+    ).padStart(2, "0");
+
+    const day = String(
+        date.getDate()
+    ).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+
+}
+
+
+// ========================================
+// FORMAT TIME
+// ========================================
+
+function formatTimer(seconds) {
+
+    const hours =
+        Math.floor(seconds / 3600);
+
+    const minutes =
+        Math.floor((seconds % 3600) / 60);
+
+    const remainingSeconds =
+        seconds % 60;
+
+    return (
+        String(hours).padStart(2, "0") +
+        ":" +
+        String(minutes).padStart(2, "0") +
+        ":" +
+        String(remainingSeconds).padStart(2, "0")
+    );
+
+}
+
+
+function formatMinutes(seconds) {
+
+    const minutes =
+        Math.floor(seconds / 60);
+
+    return minutes + " min";
+
+}
+
+
+// ========================================
+// PLANNED STUDY
+// ========================================
+
+function renderPlannedStudy() {
+
+    const plannerData =
+        getPlannerData();
+
+    const today =
+        getToday();
+
+    const todayPlans =
+        plannerData.filter(function (plan) {
+
+            return plan.date === today;
+
+        });
+
+
+    plannedStudyList.innerHTML = "";
+
+
+    if (todayPlans.length === 0) {
+
+        plannedStudyList.innerHTML = `
+
+            <div class="study-empty">
+
+                <h3>
+                    No study planned for today.
+                </h3>
+
+                <p>
+                    Add a study plan first, then start your session here.
+                </p>
+
+                <button
+                    type="button"
+                    class="primary-button"
+                    onclick="window.location.href='planner.html'"
+                >
+                    Open Planner
+                </button>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    todayPlans.forEach(function (plan) {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "planned-study-card";
+
+
+        card.innerHTML = `
+
+            <div class="planned-study-info">
+
+                <p class="planned-study-time">
+                    ${plan.time}
+                </p>
+
+                <h3>
+                    ${escapeHTML(plan.subject)}
+                </h3>
+
+                <p>
+                    ${escapeHTML(plan.topic)}
+                </p>
+
+                <span>
+                    Planned: ${escapeHTML(plan.duration)}
+                </span>
+
+            </div>
+
+            <button
+                type="button"
+                class="primary-button start-session-button"
+                data-plan-id="${plan.id}"
+            >
+                Start Studying
+            </button>
+
+        `;
+
+
+        plannedStudyList.appendChild(card);
+
+    });
+
+}
+
+
+// ========================================
+// ACTIVE SESSION STATE
+// ========================================
+
+let activePlan = null;
+
+let elapsedSeconds = 0;
+
+let timerInterval = null;
+
+let sessionPaused = false;
+
+let sessionFinished = false;
+
+let pendingSession = null;
+
+
+// ========================================
+// START SESSION
+// ========================================
+
+function startSession(plan) {
+
+    activePlan = plan;
+
+    elapsedSeconds = 0;
+
+    sessionPaused = false;
+
+    sessionFinished = false;
+
+
+    activeSubject.textContent =
+        plan.subject;
+
+    activeTopic.textContent =
+        plan.topic;
+
+    sessionTimer.textContent =
+        "00:00:00";
+
+    sessionStatus.textContent =
+        "● Focusing";
+
+    pauseSessionButton.textContent =
+        "Pause";
+
+
+    activeSessionSection.style.display =
+        "block";
+
+
+    sessionResultSection.style.display =
+        "none";
+
+
+    activeSessionSection.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+
+    clearInterval(timerInterval);
+
+
+    timerInterval = setInterval(
+        function () {
+
+            if (sessionPaused) {
+                return;
+            }
+
+            elapsedSeconds++;
+
+            sessionTimer.textContent =
+                formatTimer(elapsedSeconds);
+
+        },
+        1000
+    );
+
+}
+
+
+// ========================================
+// PAUSE / RESUME
+// ========================================
+
+pauseSessionButton.addEventListener(
+    "click",
+    function () {
+
+        if (!activePlan) {
+            return;
+        }
+
+
+        sessionPaused =
+            !sessionPaused;
+
+
+        if (sessionPaused) {
+
+            pauseSessionButton.textContent =
+                "Resume";
+
+            sessionStatus.textContent =
+                "● Paused";
+
+        } else {
+
+            pauseSessionButton.textContent =
+                "Pause";
+
+            sessionStatus.textContent =
+                "● Focusing";
+
+        }
+
+    }
+);
+
+
+// ========================================
+// FINISH SESSION
+// ========================================
+
+finishSessionButton.addEventListener(
+    "click",
+    function () {
+
+        if (!activePlan) {
+            return;
+        }
+
+
+        clearInterval(timerInterval);
+
+        sessionFinished = true;
+
+
+        const plannedSeconds =
+            parseDuration(
+                activePlan.duration
+            );
+
+
+        const differenceSeconds =
+            elapsedSeconds -
+            plannedSeconds;
+
+
+        resultSessionName.textContent =
+            `${activePlan.subject} · ${activePlan.topic}`;
+
+
+        resultPlanned.textContent =
+            formatMinutes(plannedSeconds);
+
+
+        resultActual.textContent =
+            formatMinutes(elapsedSeconds);
+
+
+        if (differenceSeconds >= 0) {
+
+            resultDifference.textContent =
+                "+" + formatMinutes(
+                    differenceSeconds
+                );
+
+        } else {
+
+            resultDifference.textContent =
+                "-" + formatMinutes(
+                    Math.abs(differenceSeconds)
+                );
+
+        }
+
+
+        pendingSession = {
+
+    id: Date.now(),
+
+    plannerId: activePlan.id,
+
+    subject: activePlan.subject,
+
+    topic: activePlan.topic,
+
+    plannedDuration:
+        plannedSeconds,
+
+    actualDuration:
+        elapsedSeconds,
+
+    notes: "",
+
+    focusRating: null,
+
+    topicStatus: "continue",
+
+    sessionStatus: "completed",
+
+    date:
+        getToday()
+
+};
+
+
+        activeSessionSection.style.display =
+            "none";
+
+
+        sessionResultSection.style.display =
+            "block";
+
+
+        sessionResultSection.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+    }
+);
+
+
+// ========================================
+// SAVE SESSION
+// ========================================
+
+saveSessionButton.addEventListener(
+    "click",
+    function () {
+
+        if (!pendingSession) {
+            return;
+        }
+
+
+       const selectedFocus =
+    document.querySelector(
+        'input[name="focus-rating"]:checked'
+    );
+
+const selectedTopicStatus =
+    document.querySelector(
+        'input[name="topic-status"]:checked'
+    );
+
+const selectedSessionStatus =
+    document.querySelector(
+        'input[name="session-status"]:checked'
+    );
+
+
+pendingSession.notes =
+    sessionNotes.value.trim();
+
+pendingSession.focusRating =
+    selectedFocus
+        ? Number(selectedFocus.value)
+        : null;
+
+pendingSession.topicStatus =
+    selectedTopicStatus
+        ? selectedTopicStatus.value
+        : "continue";
+
+pendingSession.sessionStatus =
+    selectedSessionStatus
+        ? selectedSessionStatus.value
+        : "completed";
+
+
+const sessions =
+    getSessions();
+
+sessions.unshift(
+    pendingSession
+);
+
+saveSessions(sessions);
+
+
+        saveSessions(sessions);
+
+
+        pendingSession = null;
+
+        activePlan = null;
+
+        elapsedSeconds = 0;
+
+        sessionFinished = false;
+
+
+        sessionResultSection.style.display =
+            "none";
+            sessionNotes.value = "";
+
+focusRatingInputs.forEach(function (input) {
+    input.checked = false;
+});
+
+document.querySelector(
+    'input[name="topic-status"][value="continue"]'
+).checked = true;
+
+document.querySelector(
+    'input[name="session-status"][value="completed"]'
+).checked = true;
+
+
+        renderRecentSessions();
+
+        updateSessionCount();
+
+
+        renderPlannedStudy();
+
+    }
+);
+
+
+// ========================================
+// RECENT SESSIONS
+// ========================================
+
+function renderRecentSessions() {
+
+    const sessions =
+        getSessions();
+
+
+    recentSessionsList.innerHTML =
+        "";
+
+
+    if (sessions.length === 0) {
+
+        recentSessionsList.innerHTML = `
+
+            <div class="study-empty">
+
+                <h3>
+                    No study sessions yet.
+                </h3>
+
+                <p>
+                    Completed sessions will appear here.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    sessions
+        .slice(0, 10)
+        .forEach(function (session) {
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "recent-session-card";
+
+
+            card.innerHTML = `
+
+                <div>
+
+                    <h3>
+                        ${escapeHTML(session.subject)}
+                    </h3>
+
+                    <p>
+                        ${escapeHTML(session.topic)}
+                    </p>
+
+                </div>
+
+                <div class="session-history-time">
+
+                    <strong>
+                        ${formatMinutes(
+                            session.actualDuration
+                        )}
+                    </strong>
+
+                    <span>
+                        planned ${formatMinutes(
+                            session.plannedDuration
+                        )}
+                    </span>
+
+                </div>
+
+            `;
+
+
+            recentSessionsList.appendChild(card);
+
+        });
+
+}
+
+
+// ========================================
+// SESSION COUNT
+// ========================================
+
+function updateSessionCount() {
+
+    const sessions =
+        getSessions();
+
+    sessionCount.textContent =
+        sessions.length;
+
+}
+
+
+// ========================================
+// PARSE PLANNER DURATION
+// ========================================
+
+function parseDuration(duration) {
+
+    if (!duration) {
+        return 0;
+    }
+
+
+    const number =
+        parseInt(duration);
+
+
+    if (isNaN(number)) {
+        return 0;
+    }
+
+
+    return number * 60;
+
+}
+
+
+// ========================================
+// EVENT DELEGATION
+// ========================================
+
+plannedStudyList.addEventListener(
+    "click",
+    function (event) {
+
+        const button =
+            event.target.closest(
+                ".start-session-button"
+            );
+
+
+        if (!button) {
+            return;
+        }
+
+
+        const planId =
+            Number(button.dataset.planId);
+
+
+        const plannerData =
+            getPlannerData();
+
+
+        const plan =
+            plannerData.find(
+                function (item) {
+
+                    return item.id === planId;
+
+                }
+            );
+
+
+        if (!plan) {
+
+            alert(
+                "This study plan could not be found."
+            );
+
+            return;
+
+        }
+
+
+        startSession(plan);
+
+    }
+);
+
+
+// ========================================
+// BASIC HTML SAFETY
+// ========================================
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+// ========================================
+// INITIAL LOAD
+// ========================================
+
+renderPlannedStudy();
+
+renderRecentSessions();
+
+updateSessionCount();
+const clearHistoryButton = document.getElementById("clear-history-button");
+
+if (clearHistoryButton) {
+
+    clearHistoryButton.addEventListener("click", function () {
+
+        const sessions = JSON.parse(
+            localStorage.getItem(SESSIONS_KEY) || "[]"
+        );
+
+        if (sessions.length === 0) {
+            alert("There is no study history to clear.");
+            return;
+        }
+
+        const confirmed = confirm(
+            "Clear all study session history?\n\nThis will permanently remove all recorded sessions from this browser."
+        );
+
+        if (!confirmed) {
+            return;
+        }
+
+        localStorage.removeItem(SESSIONS_KEY);
+
+        renderRecentSessions();
+        updateSessionCount();
+
+    });
+
+}
+
+
 
                 <span>${task.priority}</span>
             `;
