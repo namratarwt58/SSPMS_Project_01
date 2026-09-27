@@ -1,1 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Study Sessions | StudyFlow</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <nav class="app-navbar">
+
+        <div class="logo">
+            StudyFlow
+        </div>
+
+        <div class="app-nav-links">
+
+            <a href="dashboard.html">Dashboard</a>
+
+            <a href="tasks.html">Tasks</a>
+
+            <a href="planner.html">Planner</a>
+
+            <a href="subjects.html">Subjects</a>
+
+            <a href="sessions.html" class="active">
+                StudySessions
+            </a>
+
+            <a href="#">Progress</a>
+
+            <a href="#">Resources</a>
+
+            <a href="profile.html">
+                Profile
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- STUDY PAGE -->
+
+    <main class="study-page">
+
+        <!-- PAGE INTRO -->
+
+        <header class="study-header">
+
+            <div>
+
+                <p class="study-eyebrow">
+                    ACTUAL STUDY
+                </p>
+
+                <h1>
+                    Study Sessions
+                </h1>
+
+                <p class="study-intro">
+                    Turn your planned study time into actual progress.
+                </p>
+
+            </div>
+
+            <div class="study-record-count">
+
+                <strong id="session-count">
+                    0
+                </strong>
+
+                <span>
+                    sessions recorded
+                </span>
+
+            </div>
+
+        </header>
+
+
+        <!-- TODAY -->
+
+        <section class="today-study-section">
+
+            <div class="section-topline">
+
+                <span>
+                    TODAY
+                </span>
+
+                <span class="section-rule"></span>
+
+            </div>
+
+
+            <div class="today-study-layout">
+
+
+                <!-- MAIN STUDY CARD -->
+
+                <div class="today-study-card">
+
+                    <div class="today-card-label">
+                        TODAY'S PLANNED STUDY
+                    </div>
+
+                    <div id="planned-study-list">
+
+                        <!-- JavaScript inserts planned sessions here -->
+
+                    </div>
+
+                </div>
+
+
+                <!-- SMALL CONTEXT PANEL -->
+
+                <aside class="study-side-note">
+
+                    <span class="side-note-number">
+                        01
+                    </span>
+
+                    <h2>
+                        Plan → Study → Track
+                    </h2>
+
+                    <p>
+                        Start a planned session here and StudyFlow
+                        will record the time you actually study.
+                    </p>
+
+                </aside>
+
+            </div>
+
+        </section>
+
+
+        <!-- ACTIVE SESSION -->
+
+        <section
+            id="active-session-section"
+            class="active-study-section"
+            style="display: none;"
+        >
+
+            <div class="section-topline">
+
+                <span>
+                    CURRENT SESSION
+                </span>
+
+                <span class="section-rule"></span>
+
+            </div>
+
+
+            <div class="active-study-workspace">
+
+                <div class="active-study-info">
+
+                    <p>
+                        NOW STUDYING
+                    </p>
+
+                    <h2 id="active-subject">
+                        DBMS
+                    </h2>
+
+                    <h3 id="active-topic">
+                        Functional Dependency
+                    </h3>
+
+                </div>
+
+
+                <div class="focus-area">
+
+                    <div
+                        id="session-timer"
+                        class="focus-timer"
+                    >
+                        00:00
+                    </div>
+
+                    <div
+                        id="session-status"
+                        class="focus-status"
+                    >
+                        Focusing
+                    </div>
+
+                </div>
+
+
+                <div class="session-actions">
+
+                    <button
+                        id="pause-session-button"
+                        class="secondary-button"
+                        type="button"
+                    >
+                        Pause
+                    </button>
+
+                    <button
+                        id="finish-session-button"
+                        class="primary-button"
+                        type="button"
+                    >
+                        Finish Session
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SESSION RESULT -->
+
+        <!-- SESSION RESULT -->
+
+<section
+    id="session-result-section"
+    class="session-result-section"
+    style="display: none;"
+>
+
+    <div class="section-topline">
+
+        <span>
+            SESSION COMPLETE
+        </span>
+
+        <span class="section-rule"></span>
+
+    </div>
+
+
+    <div class="session-result-layout">
+
+        <!-- SESSION INFORMATION -->
+
+        <div class="session-result-main">
+
+            <p class="result-label">
+                STUDY SESSION
+            </p>
+
+            <h2 id="result-session-name">
+                DBMS — Functional Dependency
+            </h2>
+
+        </div>
+
+
+        <!-- TIME METRICS -->
+
+        <div class="result-metrics">
+
+            <div>
+                <span>PLANNED</span>
+
+                <strong id="result-planned">
+                    30 min
+                </strong>
+            </div>
+
+
+            <div>
+                <span>ACTUAL</span>
+
+                <strong id="result-actual">
+                    0 min
+                </strong>
+            </div>
+
+
+            <div>
+                <span>DIFFERENCE</span>
+
+                <strong id="result-difference">
+                    0 min
+                </strong>
+            </div>
+
+        </div>
+
+
+        <!-- SESSION NOTES -->
+
+        <div class="session-review-field">
+
+            <label for="session-notes">
+                SESSION NOTES
+            </label>
+
+            <textarea
+                id="session-notes"
+                rows="4"
+                placeholder="What did you study or accomplish?"
+            ></textarea>
+
+        </div>
+
+
+        <!-- FOCUS RATING -->
+
+        <div class="session-review-field">
+
+            <label>
+                FOCUS RATING
+            </label>
+
+            <div class="focus-rating">
+
+                <label>
+                    <input
+                        type="radio"
+                        name="focus-rating"
+                        value="1"
+                    >
+                    1
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="focus-rating"
+                        value="2"
+                    >
+                    2
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="focus-rating"
+                        value="3"
+                    >
+                    3
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="focus-rating"
+                        value="4"
+                    >
+                    4
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="focus-rating"
+                        value="5"
+                    >
+                    5
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- TOPIC STATUS -->
+
+        <div class="session-review-field">
+
+            <label>
+                TOPIC STATUS
+            </label>
+
+            <div class="review-options">
+
+                <label>
+                    <input
+                        type="radio"
+                        name="topic-status"
+                        value="completed"
+                    >
+                    Completed
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="topic-status"
+                        value="continue"
+                        checked
+                    >
+                    Continue later
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- SESSION STATUS -->
+
+        <div class="session-review-field">
+
+            <label>
+                SESSION STATUS
+            </label>
+
+            <div class="review-options">
+
+                <label>
+                    <input
+                        type="radio"
+                        name="session-status"
+                        value="completed"
+                        checked
+                    >
+                    Completed
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="session-status"
+                        value="interrupted"
+                    >
+                    Interrupted
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="session-status"
+                        value="abandoned"
+                    >
+                    Abandoned
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- SAVE -->
+
+        <button
+            id="save-session-button"
+            class="primary-button"
+            type="button"
+        >
+            Save Session
+        </button>
+
+    </div>
+
+</section>
+        </section>
+
+
+        <!-- HISTORY -->
+
+        <section class="recent-study-section">
+
+            <div class="section-topline">
+
+                <span>
+                    HISTORY
+                </span>
+
+                <span class="section-rule"></span>
+
+            </div>
+
+
+<div class="recent-study-heading">
+<button
+    id="clear-history-button"
+    class="clear-history-button"
+    type="button"
+>
+    Clear history
+</button>
+    <div>
+
+        <h2>
+            Recent study
+        </h2>
+
+        <p>
+            A record of the time you've actually spent studying.
+        </p>
+
+
+</div>
+
+           <div
+    id="recent-sessions-list"
+    class="recent-study-list"
+>
+
+
+    <!-- JavaScript inserts history -->
+</div>
+
+</div>
+        
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
