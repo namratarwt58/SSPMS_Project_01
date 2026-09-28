@@ -2556,9 +2556,10 @@ body {
     }
 
 }
-//-------Study Sessions------------//
-//--------------------------------//
-//-------------------------------//
+
+/* =========================================================
+   STUDY SESSIONS
+   ========================================================= */
 
 .study-page {
     width: min(1180px, calc(100% - 48px));
@@ -3229,4 +3230,1165 @@ body {
 .clear-history-button:hover {
     border-color: #a65336;
     color: #a65336;
+}
+/* =========================================
+   STUDY SESSION STATISTICS
+   ========================================= */
+
+.study-statistics-section {
+    margin-top: 90px;
+    padding-bottom: 80px;
+}
+
+.study-statistics-heading {
+    margin: 32px 0 42px;
+    max-width: 620px;
+}
+
+.statistics-eyebrow {
+    margin: 0 0 10px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+}
+
+.study-statistics-heading h2 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.study-statistics-heading p:last-child {
+    margin: 18px 0 0;
+    max-width: 500px;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+
+/* STATISTICS GRID */
+
+.study-statistics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+
+/* INDIVIDUAL STAT */
+
+.study-stat-card {
+    min-height: 230px;
+    padding: 28px 26px 30px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.study-stat-card:last-child {
+    border-right: none;
+}
+
+
+/* TOP ROW */
+
+.study-stat-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.study-stat-number {
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+}
+
+.study-stat-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+}
+
+
+/* LARGE NUMBER */
+
+.study-stat-card strong {
+    display: block;
+    margin-top: 40px;
+    font-size: clamp(2rem, 4vw, 3.3rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+    font-weight: 600;
+    color: var(--text);
+}
+
+
+/* DESCRIPTION */
+
+.study-stat-card p {
+    margin: 18px 0 0;
+    max-width: 190px;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--muted);
+}
+
+
+/* FIRST STAT EMPHASIS */
+
+.study-stat-primary {
+    background: var(--surface);
+}
+
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+
+    .study-statistics-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .study-stat-card:nth-child(2) {
+        border-right: none;
+    }
+
+    .study-stat-card:nth-child(-n + 2) {
+        border-bottom: 1px solid var(--border);
+    }
+
+}
+
+
+@media (max-width: 560px) {
+
+    .study-statistics-section {
+        margin-top: 60px;
+    }
+
+    .study-statistics-heading {
+        margin-bottom: 30px;
+    }
+
+    .study-statistics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .study-stat-card,
+    .study-stat-card:nth-child(2) {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .study-stat-card:last-child {
+        border-bottom: none;
+    }
+
+}
+/* ========================================
+   DASHBOARD CONTENT
+   ======================================== */
+
+.dashboard-section {
+    margin-top: 56px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+}
+
+.section-heading h2 {
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+.section-heading a {
+    color: var(--muted);
+    font-size: 0.82rem;
+    text-decoration: none;
+}
+
+.section-heading a:hover {
+    color: var(--text);
+}
+
+
+/* ========================================
+   TODAY'S TASKS
+   ======================================== */
+
+.today-tasks-list {
+    margin-top: 8px;
+}
+
+.dashboard-task-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 24px;
+
+    padding: 20px 4px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.dashboard-task-item h3 {
+    margin: 0 0 5px;
+
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.dashboard-task-item p {
+    margin: 0;
+
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.dashboard-task-item span {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+
+/* ========================================
+   RECENT STUDY SESSIONS
+   ======================================== */
+
+.dashboard-session-list {
+    margin-top: 8px;
+}
+
+.dashboard-session-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 24px;
+
+    padding: 20px 4px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.dashboard-session-item h3 {
+    margin: 0 0 5px;
+
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.dashboard-session-item p {
+    margin: 0;
+
+    color: var(--muted);
+    font-size: 0.85rem;
+}
+
+.dashboard-session-item > div:last-child {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+}
+
+.dashboard-session-item strong {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.dashboard-session-item span {
+    color: var(--muted);
+
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+
+/* ========================================
+   EMPTY STATES
+   ======================================== */
+
+.dashboard-section .empty-state {
+    margin-top: 8px;
+
+    padding: 36px 4px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.dashboard-section .empty-state h3 {
+    margin-bottom: 8px;
+}
+
+.dashboard-section .empty-state p {
+    max-width: 500px;
+}
+
+
+/* ========================================
+   MOBILE
+   ======================================== */
+
+@media (max-width: 600px) {
+
+    .dashboard-task-item,
+    .dashboard-session-item {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .dashboard-session-item > div:last-child {
+        align-items: flex-start;
+    }
+
+}
+/* =========================================================
+   STUDYFLOW DASHBOARD — VISUAL REDESIGN
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   DASHBOARD BASE
+--------------------------------------------------------- */
+
+.dashboard {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 64px 32px 100px;
+}
+
+
+/* ---------------------------------------------------------
+   NAVIGATION
+--------------------------------------------------------- */
+
+.dashboard-navbar {
+    border-bottom: 1px solid var(--border);
+}
+
+.dashboard-navbar .logo {
+    font-weight: 700;
+    letter-spacing: -0.03em;
+}
+
+.dashboard-navbar .nav-links a {
+    transition: color 0.2s ease;
+}
+
+.dashboard-navbar .nav-links a.active {
+    color: var(--text);
+    font-weight: 600;
+}
+
+
+/* ---------------------------------------------------------
+   HEADER
+--------------------------------------------------------- */
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    gap: 40px;
+
+    padding-bottom: 48px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.dashboard-header-main {
+    max-width: 650px;
+}
+
+.dashboard-header .section-label {
+    margin-bottom: 16px;
+
+    font-size: 0.72rem;
+    font-weight: 700;
+
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+
+    color: var(--muted);
+}
+
+.dashboard-header h1 {
+    margin: 0;
+
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 0.95;
+
+    letter-spacing: -0.055em;
+    font-weight: 650;
+}
+
+.dashboard-subtitle {
+    max-width: 520px;
+
+    margin: 20px 0 0;
+
+    color: var(--muted);
+
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.dashboard-date {
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    color: var(--muted);
+
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+}
+
+.dashboard-date strong {
+    margin: 2px 0;
+
+    color: var(--text);
+
+    font-size: 2rem;
+    line-height: 1;
+
+    letter-spacing: -0.04em;
+}
+
+
+/* ---------------------------------------------------------
+   SUMMARY
+--------------------------------------------------------- */
+
+.summary-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 12px;
+
+    margin-top: 28px;
+}
+
+.summary-card {
+    position: relative;
+
+    min-height: 170px;
+
+    padding: 22px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.summary-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #bdb5aa;
+}
+
+.summary-card-primary {
+    background: #292725;
+    color: #f8f5ef;
+    border-color: #292725;
+}
+
+.summary-card-primary:hover {
+    border-color: #292725;
+}
+
+.summary-card-top {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+.summary-number {
+    font-size: 0.7rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+
+    opacity: 0.55;
+}
+
+.summary-label {
+    font-size: 0.65rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.12em;
+
+    opacity: 0.6;
+}
+
+.summary-value {
+    margin-top: 30px;
+
+    font-size: 2.7rem;
+
+    line-height: 1;
+
+    font-weight: 650;
+
+    letter-spacing: -0.05em;
+}
+
+.summary-card p {
+    margin: 10px 0 0;
+
+    color: var(--muted);
+
+    font-size: 0.8rem;
+}
+
+.summary-card-primary p {
+    color: rgba(248, 245, 239, 0.62);
+}
+
+
+/* ---------------------------------------------------------
+   MAIN CONTENT
+--------------------------------------------------------- */
+
+.dashboard-content-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.35fr)
+        minmax(320px, 0.85fr);
+
+    gap: 16px;
+
+    margin-top: 64px;
+}
+
+
+/* ---------------------------------------------------------
+   PANELS
+--------------------------------------------------------- */
+
+.dashboard-panel {
+    min-width: 0;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+}
+
+.panel-heading {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: flex-end;
+
+    gap: 20px;
+
+    padding: 24px 26px 20px;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.panel-eyebrow {
+    margin: 0 0 7px;
+
+    color: var(--muted);
+
+    font-size: 0.65rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.13em;
+
+    text-transform: uppercase;
+}
+
+.panel-heading h2 {
+    margin: 0;
+
+    font-size: 1.25rem;
+
+    line-height: 1.1;
+
+    letter-spacing: -0.025em;
+}
+
+.panel-link {
+    flex-shrink: 0;
+
+    color: var(--muted);
+
+    font-size: 0.76rem;
+
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+.panel-link:hover {
+    color: var(--text);
+}
+
+
+/* ---------------------------------------------------------
+   EMPTY STATES
+--------------------------------------------------------- */
+
+.empty-state {
+    min-height: 280px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 22px;
+
+    padding: 34px 26px;
+
+    background: transparent;
+}
+
+.empty-state-mark {
+    flex-shrink: 0;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 48px;
+    height: 48px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 50%;
+
+    color: var(--muted);
+
+    font-size: 1.2rem;
+}
+
+.empty-state h3 {
+    margin: 0 0 7px;
+
+    font-size: 1rem;
+
+    letter-spacing: -0.01em;
+}
+
+.empty-state p {
+    max-width: 360px;
+
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 0.82rem;
+
+    line-height: 1.6;
+}
+
+
+/* ---------------------------------------------------------
+   BUTTONS
+--------------------------------------------------------- */
+
+.empty-state .primary-button,
+.empty-state .secondary-button {
+    margin-top: 20px;
+
+    min-height: 40px;
+
+    padding: 0 17px;
+
+    border: 0;
+
+    font-family: inherit;
+
+    font-size: 0.78rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.empty-state .primary-button {
+    background: var(--text);
+
+    color: var(--surface);
+}
+
+.empty-state .secondary-button {
+    background: #e5dfd6;
+
+    color: var(--text);
+}
+
+.empty-state .primary-button:hover,
+.empty-state .secondary-button:hover {
+    transform: translateY(-1px);
+
+    opacity: 0.88;
+}
+
+
+/* ---------------------------------------------------------
+   TASK LIST GENERATED BY JAVASCRIPT
+--------------------------------------------------------- */
+
+.today-tasks-list {
+    padding: 4px 26px 10px;
+}
+
+.dashboard-task-item {
+    display: grid;
+
+    grid-template-columns: 1fr auto;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 19px 0;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.dashboard-task-item:last-child {
+    border-bottom: 0;
+}
+
+.dashboard-task-item h3 {
+    margin: 0 0 5px;
+
+    font-size: 0.96rem;
+
+    font-weight: 600;
+
+    letter-spacing: -0.01em;
+}
+
+.dashboard-task-item p {
+    margin: 0;
+
+    color: var(--muted);
+
+    font-size: 0.76rem;
+}
+
+.dashboard-task-item span {
+    padding: 5px 8px;
+
+    background: #eee9e1;
+
+    color: var(--text);
+
+    font-size: 0.61rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+}
+
+
+/* =====================================================
+   STUDYFLOW DASHBOARD
+   ===================================================== */
+
+.dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+}
+
+
+/* -----------------------------------------------------
+   HEADER
+   ----------------------------------------------------- */
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px;
+    margin-bottom: 36px;
+}
+
+.dashboard-header h1 {
+    margin: 6px 0 8px;
+    font-size: 42px;
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+.dashboard-header > div > p:last-child {
+    margin: 0;
+    color: var(--muted);
+    font-size: 15px;
+}
+
+
+/* -----------------------------------------------------
+   SUMMARY CARDS
+   ----------------------------------------------------- */
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.summary-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 22px;
+    min-height: 135px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.summary-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.summary-card h2 {
+    margin: 12px 0 4px;
+    font-size: 32px;
+    line-height: 1;
+}
+
+.summary-card span {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+
+/* -----------------------------------------------------
+   MAIN DASHBOARD GRID
+   ----------------------------------------------------- */
+
+.dashboard-main-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.dashboard-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 26px;
+    min-height: 360px;
+}
+
+
+/* -----------------------------------------------------
+   PANEL HEADERS
+   ----------------------------------------------------- */
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.panel-header h2 {
+    margin: 5px 0 0;
+    font-size: 22px;
+}
+
+.panel-header a {
+    color: var(--text);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.panel-header a:hover {
+    text-decoration: underline;
+}
+
+
+/* -----------------------------------------------------
+   SECTION LABEL
+   ----------------------------------------------------- */
+
+.section-label {
+    margin: 0;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+
+/* -----------------------------------------------------
+   EMPTY STATE
+   ----------------------------------------------------- */
+
+.dashboard-empty-state {
+    min-height: 245px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.dashboard-empty-state h3 {
+    margin: 0 0 8px;
+    font-size: 18px;
+}
+
+.dashboard-empty-state p {
+    max-width: 380px;
+    margin: 0 0 20px;
+    color: var(--muted);
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+
+/* -----------------------------------------------------
+   TODAY'S TASKS
+   ----------------------------------------------------- */
+
+.today-tasks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.dashboard-task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+
+    padding: 15px 16px;
+
+    border: 1px solid var(--border);
+    background: var(--background);
+}
+
+.dashboard-task-item h3 {
+    margin: 0 0 4px;
+    font-size: 15px;
+}
+
+.dashboard-task-item p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.dashboard-task-priority {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+
+/* -----------------------------------------------------
+   STUDY SESSION LIST
+   ----------------------------------------------------- */
+
+.dashboard-session-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.dashboard-session-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    padding: 16px;
+
+    border: 1px solid var(--border);
+    background: var(--background);
+}
+
+.dashboard-session-item h3 {
+    margin: 0 0 5px;
+    font-size: 15px;
+}
+
+.dashboard-session-item p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.dashboard-session-item > div:last-child {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex-shrink: 0;
+}
+
+.dashboard-session-item strong {
+    font-size: 15px;
+}
+
+.dashboard-session-item span {
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+
+/* -----------------------------------------------------
+   PRODUCTIVITY OVERVIEW
+   ----------------------------------------------------- */
+
+.productivity-section {
+    margin-top: 10px;
+}
+
+.productivity-section .section-heading {
+    margin-bottom: 18px;
+}
+
+.productivity-section h2 {
+    margin: 5px 0 0;
+    font-size: 24px;
+}
+
+.productivity-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.productivity-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 24px;
+    min-height: 160px;
+}
+
+.productivity-card p {
+    margin: 0 0 16px;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+
+.productivity-card h3 {
+    margin: 0 0 10px;
+    font-size: 17px;
+    line-height: 1.35;
+}
+
+.productivity-card span {
+    display: block;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* -----------------------------------------------------
+   RESPONSIVE
+   ----------------------------------------------------- */
+
+@media (max-width: 900px) {
+
+    .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-main-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .productivity-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .dashboard {
+        padding: 32px 18px 60px;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .dashboard-header h1 {
+        font-size: 34px;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-panel {
+        padding: 20px;
+    }
+
+    .panel-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .dashboard-task-item,
+    .dashboard-session-item {
+        align-items: flex-start;
+    }
+
 }
