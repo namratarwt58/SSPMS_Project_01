@@ -95,3 +95,13 @@ Day 2:
 
 ## Current Status
 -Refined Tasks, Subject and Planner modules succcessfully
+
+## Day 8-9:
+-Dashboard UI refined
+-Connected Tasks and Recent Study Sessions 
+-Added dedicated Productivity Insights
+
+## Current Status:
+-Dashboard Completed &  Integrated
+
+
