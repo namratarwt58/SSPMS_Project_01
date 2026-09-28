@@ -730,9 +730,7 @@ if (taskForm) {
 /* =====================================================
    PLANNER MODULE
 ===================================================== */
-// =====================================================
-// STUDYFLOW - STUDY PLANNER
-// =====================================================
+
 
 const plannerForm = document.getElementById("planner-form");
 
@@ -1347,7 +1345,150 @@ if (todayTasksContainer) {
                     <h3>${task.title}</h3>
                     <p>${task.subject}</p>
                 </div>
-                // ========================================
+
+                <span>${task.priority}</span>
+            `;
+
+            todayTasksContainer.appendChild(taskItem);
+        });
+    }
+}
+// ========================================
+// DASHBOARD STUDY SESSIONS
+// ========================================
+
+const studyHoursCount =
+    document.getElementById("study-hours-count");
+
+const dashboardRecentSessions =
+    document.getElementById("dashboard-recent-sessions");
+
+
+if (studyHoursCount) {
+
+    const sessions =
+        JSON.parse(
+            localStorage.getItem("studyflow_sessions")
+        ) || [];
+
+
+    const today = new Date();
+
+    const year =
+        today.getFullYear();
+
+    const month =
+        String(today.getMonth() + 1).padStart(2, "0");
+
+    const day =
+        String(today.getDate()).padStart(2, "0");
+
+    const todayDate =
+        `${year}-${month}-${day}`;
+
+
+    const todaySessions =
+        sessions.filter(function (session) {
+
+            return session.date === todayDate;
+
+        });
+
+
+    let totalSeconds = 0;
+
+
+    todaySessions.forEach(function (session) {
+
+        totalSeconds +=
+            Number(session.actualDuration) || 0;
+
+    });
+
+
+    const totalHours =
+        totalSeconds / 3600;
+
+
+    studyHoursCount.textContent =
+        totalHours.toFixed(1) + "h";
+
+}
+
+
+if (dashboardRecentSessions) {
+
+    const sessions =
+        JSON.parse(
+            localStorage.getItem("studyflow_sessions")
+        ) || [];
+
+
+    if (sessions.length > 0) {
+
+        dashboardRecentSessions.className =
+            "dashboard-session-list";
+
+        dashboardRecentSessions.innerHTML =
+            "";
+
+
+        sessions
+            .slice(0, 3)
+            .forEach(function (session) {
+
+                const item =
+                    document.createElement("div");
+
+
+                item.className =
+                    "dashboard-session-item";
+
+
+                const actualMinutes =
+                    Math.floor(
+                        (Number(session.actualDuration) || 0) / 60
+                    );
+
+
+                item.innerHTML = `
+
+                    <div>
+
+                        <h3>
+                            ${session.subject}
+                        </h3>
+
+                        <p>
+                            ${session.topic}
+                        </p>
+
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            ${actualMinutes} min
+                        </strong>
+
+                        <span>
+                            actual study
+                        </span>
+
+                    </div>
+
+                `;
+
+
+                dashboardRecentSessions
+                    .appendChild(item);
+
+            });
+
+    }
+
+}
+// ========================================
 // STUDY SESSIONS MODULE
 // ========================================
 
@@ -1414,6 +1555,17 @@ const sessionStatusInputs =
 
 const recentSessionsList =
     document.getElementById("recent-sessions-list");
+    const todayStudyTime =
+    document.getElementById("today-study-time");
+
+const todaySessionCount =
+    document.getElementById("today-session-count");
+
+const todayPlannedTime =
+    document.getElementById("today-planned-time");
+
+const todayFocusRating =
+    document.getElementById("today-focus-rating");
 
 const sessionCount =
     document.getElementById("session-count");
@@ -1473,7 +1625,73 @@ function getToday() {
 
 }
 
+function renderTodayStatistics() {
 
+    const sessions = getSessions();
+
+    const today = getToday();
+
+    const todaySessions =
+        sessions.filter(function (session) {
+            return session.date === today;
+        });
+
+
+    let actualSeconds = 0;
+    let plannedSeconds = 0;
+
+    let focusTotal = 0;
+    let focusCount = 0;
+
+
+    todaySessions.forEach(function (session) {
+
+        actualSeconds +=
+            Number(session.actualDuration) || 0;
+
+        plannedSeconds +=
+            Number(session.plannedDuration) || 0;
+
+
+        if (session.focusRating !== null &&
+            session.focusRating !== undefined) {
+
+            focusTotal +=
+                Number(session.focusRating);
+
+            focusCount++;
+
+        }
+
+    });
+
+
+    todayStudyTime.textContent =
+        formatMinutes(actualSeconds);
+
+    todaySessionCount.textContent =
+        todaySessions.length;
+
+    todayPlannedTime.textContent =
+        formatMinutes(plannedSeconds);
+
+
+    if (focusCount > 0) {
+
+        const averageFocus =
+            focusTotal / focusCount;
+
+        todayFocusRating.textContent =
+            averageFocus.toFixed(1) + "/5";
+
+    } else {
+
+        todayFocusRating.textContent =
+            "—";
+
+    }
+
+}
 // ========================================
 // FORMAT TIME
 // ========================================
@@ -1928,13 +2146,12 @@ document.querySelector(
 ).checked = true;
 
 
-        renderRecentSessions();
-
-        updateSessionCount();
-
-
-        renderPlannedStudy();
-
+renderRecentSessions();
+updateSessionCount();
+renderRecentSessions();
+updateSessionCount();
+renderPlannedStudy();
+renderTodayStatistics();
     }
 );
 
@@ -1948,10 +2165,8 @@ function renderRecentSessions() {
     const sessions =
         getSessions();
 
-
     recentSessionsList.innerHTML =
         "";
-
 
     if (sessions.length === 0) {
 
@@ -1975,7 +2190,6 @@ function renderRecentSessions() {
 
     }
 
-
     sessions
         .slice(0, 10)
         .forEach(function (session) {
@@ -1985,6 +2199,33 @@ function renderRecentSessions() {
 
             card.className =
                 "recent-session-card";
+
+
+            const focusText =
+                session.focusRating
+                    ? `${session.focusRating}/5`
+                    : "—";
+
+
+            const topicText =
+                session.topicStatus === "completed"
+                    ? "Completed"
+                    : session.topicStatus === "continue"
+                        ? "Continue later"
+                        : "—";
+
+
+            const statusText =
+                session.sessionStatus
+                    ? session.sessionStatus.charAt(0).toUpperCase()
+                        + session.sessionStatus.slice(1)
+                    : "—";
+
+
+            const notesText =
+                session.notes
+                    ? escapeHTML(session.notes)
+                    : "—";
 
 
             card.innerHTML = `
@@ -2001,6 +2242,7 @@ function renderRecentSessions() {
 
                 </div>
 
+
                 <div class="session-history-time">
 
                     <strong>
@@ -2014,6 +2256,31 @@ function renderRecentSessions() {
                             session.plannedDuration
                         )}
                     </span>
+
+                </div>
+
+
+                <div class="session-history-details">
+
+                    <p>
+                        <strong>Focus:</strong>
+                        ${focusText}
+                    </p>
+
+                    <p>
+                        <strong>Topic:</strong>
+                        ${topicText}
+                    </p>
+
+                    <p>
+                        <strong>Session:</strong>
+                        ${statusText}
+                    </p>
+
+                    <p>
+                        <strong>Notes:</strong>
+                        ${notesText}
+                    </p>
 
                 </div>
 
@@ -2173,17 +2440,166 @@ if (clearHistoryButton) {
 
         renderRecentSessions();
         updateSessionCount();
-
+renderPlannedStudy();
+renderRecentSessions();
+updateSessionCount();
+renderTodayStatistics();
     });
 
 }
 
+// =====================================================
+// DASHBOARD PRODUCTIVITY OVERVIEW
+// =====================================================
+
+const taskCompletionValue =
+    document.getElementById("task-completion-value");
+
+const taskCompletionDetail =
+    document.getElementById("task-completion-detail");
+
+const weeklyStudyTime =
+    document.getElementById("weekly-study-time");
+
+const averageFocusValue =
+    document.getElementById("average-focus-value");
+
+const averageFocusDetail =
+    document.getElementById("average-focus-detail");
 
 
-                <span>${task.priority}</span>
-            `;
+if (
+    taskCompletionValue &&
+    taskCompletionDetail &&
+    weeklyStudyTime &&
+    averageFocusValue &&
+    averageFocusDetail
+) {
 
-            todayTasksContainer.appendChild(taskItem);
-        });
+    // -------------------------------------------------
+    // TASK COMPLETION
+    // -------------------------------------------------
+
+    const tasks =
+        JSON.parse(localStorage.getItem("studyflow_tasks")) || [];
+
+    const totalTasks = tasks.length;
+
+    const completedTasks =
+        tasks.filter(function (task) {
+            return task.completed === true;
+        }).length;
+
+
+    let completionPercentage = 0;
+
+    if (totalTasks > 0) {
+        completionPercentage =
+            Math.round((completedTasks / totalTasks) * 100);
     }
+
+
+    taskCompletionValue.textContent =
+        completionPercentage + "%";
+
+
+    taskCompletionDetail.textContent =
+        completedTasks +
+        " of " +
+        totalTasks +
+        " tasks completed";
+
+
+    // -------------------------------------------------
+    // WEEKLY STUDY ACTIVITY
+    // -------------------------------------------------
+
+    const sessions =
+        JSON.parse(localStorage.getItem("studyflow_sessions")) || [];
+
+
+    const today = new Date();
+
+    const dayOfWeek = today.getDay();
+
+    const startOfWeek = new Date(today);
+
+    startOfWeek.setDate(
+        today.getDate() - dayOfWeek
+    );
+
+    startOfWeek.setHours(0, 0, 0, 0);
+
+
+    let weeklyStudySeconds = 0;
+
+
+    sessions.forEach(function (session) {
+
+        const sessionDate =
+            new Date(session.date + "T00:00:00");
+
+
+        if (sessionDate >= startOfWeek) {
+
+            weeklyStudySeconds +=
+                Number(session.actualDuration) || 0;
+
+        }
+
+    });
+
+
+    const weeklyStudyHours =
+        weeklyStudySeconds / 3600;
+
+
+    weeklyStudyTime.textContent =
+        weeklyStudyHours.toFixed(1) + "h";
+
+
+    // -------------------------------------------------
+    // AVERAGE FOCUS
+    // -------------------------------------------------
+
+    const sessionsWithRating =
+        sessions.filter(function (session) {
+
+            return (
+                session.focusRating !== null &&
+                session.focusRating !== undefined &&
+                Number(session.focusRating) > 0
+            );
+
+        });
+
+
+    if (sessionsWithRating.length > 0) {
+
+        let totalFocus = 0;
+
+
+        sessionsWithRating.forEach(function (session) {
+
+            totalFocus +=
+                Number(session.focusRating);
+
+        });
+
+
+        const averageFocus =
+            totalFocus / sessionsWithRating.length;
+
+
+        averageFocusValue.textContent =
+            averageFocus.toFixed(1) + " / 5";
+
+
+        averageFocusDetail.textContent =
+            sessionsWithRating.length +
+            " recorded session" +
+            (sessionsWithRating.length === 1 ? "" : "s");
+
+    }
+
 }
