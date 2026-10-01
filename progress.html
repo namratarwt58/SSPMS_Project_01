@@ -1,1 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Progress | StudyFlow</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav class="app-navbar">
+
+    <div class="logo">StudyFlow</div>
+
+    <div class="app-nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="tasks.html">Tasks</a>
+        <a href="planner.html">Planner</a>
+        <a href="subjects.html">Subjects</a>
+        <a href="sessions.html">Study</a>
+        <a href="progress.html" class="active">Progress</a>
+       
+    </div>
+
+</nav>
+
+
+<main class="progress-page">
+
+    <!-- HEADER -->
+
+    <header class="progress-hero">
+
+        <div>
+            <p class="section-label">STUDY ANALYSIS</p>
+
+            <h1>Your Progress</h1>
+
+            <p>
+                See how your workload, study time and focus are developing.
+            </p>
+        </div>
+
+        <div class="progress-period">
+            <span>TRACKING</span>
+            <strong>All recorded activity</strong>
+        </div>
+
+    </header>
+
+
+    <!-- KEY METRICS -->
+
+    <section class="progress-metrics">
+
+        <div class="progress-metric">
+            <span>Total Tasks</span>
+            <strong id="progress-total-tasks">0</strong>
+            <small>Academic workload</small>
+        </div>
+
+        <div class="progress-metric">
+            <span>Completion Rate</span>
+            <strong id="progress-completion-rate">0%</strong>
+            <small>Tasks completed</small>
+        </div>
+
+        <div class="progress-metric">
+            <span>Study Time</span>
+            <strong id="progress-study-hours">0h</strong>
+            <small>Actual study</small>
+        </div>
+
+        <div class="progress-metric">
+            <span>Average Focus</span>
+            <strong id="progress-average-focus">0 / 5</strong>
+            <small>Rated sessions</small>
+        </div>
+
+    </section>
+
+
+    <!-- WORKLOAD + TASK COMPLETION -->
+
+    <section class="progress-analysis-grid">
+
+        <div class="analysis-panel completion-panel">
+
+            <div class="analysis-panel-header">
+                <div>
+                    <p class="section-label">TASKS</p>
+                    <h2>Task Completion</h2>
+                </div>
+
+                <span class="analysis-tag">WORKLOAD</span>
+            </div>
+
+            <div class="completion-content">
+
+                <div class="completion-number">
+                    <strong id="completion-large-rate">0%</strong>
+                    <span>completed</span>
+                </div>
+
+                <div class="completion-bar">
+                    <div id="completion-bar-fill"></div>
+                </div>
+
+                <div class="completion-breakdown">
+
+                    <div>
+                        <strong id="progress-completed-tasks">0</strong>
+                        <span>Completed</span>
+                    </div>
+
+                    <div>
+                        <strong id="progress-pending-tasks">0</strong>
+                        <span>Pending</span>
+                    </div>
+
+                    <div>
+                        <strong id="progress-overdue-tasks">0</strong>
+                        <span>Overdue</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="analysis-panel workload-panel">
+
+            <div class="analysis-panel-header">
+                <div>
+                    <p class="section-label">ATTENTION</p>
+                    <h2>Workload Pressure</h2>
+                </div>
+            </div>
+
+            <div class="workload-items">
+
+                <div class="workload-item">
+                    <div>
+                        <span>Pending tasks</span>
+                        <small>Tasks still requiring work</small>
+                    </div>
+
+                    <strong id="workload-pending">0</strong>
+                </div>
+
+                <div class="workload-item">
+                    <div>
+                        <span>High priority</span>
+                        <small>Pending high-priority work</small>
+                    </div>
+
+                    <strong id="progress-high-priority">0</strong>
+                </div>
+
+                <div class="workload-item">
+                    <div>
+                        <span>Overdue</span>
+                        <small>Past their deadline</small>
+                    </div>
+
+                    <strong id="workload-overdue">0</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- STUDY ACTIVITY -->
+
+    <section class="analysis-panel study-panel">
+
+        <div class="analysis-panel-header">
+
+            <div>
+                <p class="section-label">STUDY ACTIVITY</p>
+                <h2>Actual Study Time</h2>
+            </div>
+
+            <span class="analysis-tag">RECORDED SESSIONS</span>
+
+        </div>
+
+        <div class="study-stat-grid">
+
+            <div>
+                <span>Total study</span>
+                <strong id="study-time-large">0h</strong>
+            </div>
+
+            <div>
+                <span>Sessions</span>
+                <strong id="progress-session-count">0</strong>
+            </div>
+
+            <div>
+                <span>Average session</span>
+                <strong id="progress-average-session">0 min</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PLANNED VS ACTUAL -->
+
+    <section class="analysis-panel planning-panel">
+
+        <div class="analysis-panel-header">
+
+            <div>
+                <p class="section-label">PLANNING</p>
+                <h2>Planned vs Actual</h2>
+            </div>
+
+            <span id="plan-performance-label">0%</span>
+
+        </div>
+
+        <div class="plan-comparison">
+
+            <div class="plan-row">
+
+                <div class="plan-row-label">
+                    <span>Planned study</span>
+                    <strong id="progress-planned-time">0h</strong>
+                </div>
+
+                <div class="plan-bar">
+                    <div class="plan-bar-fill planned"></div>
+                </div>
+
+            </div>
+
+
+            <div class="plan-row">
+
+                <div class="plan-row-label">
+                    <span>Actual study</span>
+                    <strong id="progress-actual-time">0h</strong>
+                </div>
+
+                <div class="plan-bar">
+                    <div
+                        class="plan-bar-fill actual"
+                        id="actual-plan-bar">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="planning-footer">
+            <span>Plan completion</span>
+            <strong id="progress-plan-percentage">0%</strong>
+        </div>
+
+    </section>
+
+
+    <!-- SUBJECT ANALYSIS -->
+
+    <section class="analysis-panel subject-panel">
+
+        <div class="analysis-panel-header">
+
+            <div>
+                <p class="section-label">SUBJECTS</p>
+                <h2>Where Your Study Time Goes</h2>
+            </div>
+
+        </div>
+
+        <div
+            id="progress-subject-list"
+            class="progress-subject-list">
+
+            <div class="progress-empty-state">
+
+                <div class="empty-icon">—</div>
+
+                <h3>No study data yet</h3>
+
+                <p>
+                    Complete study sessions to see your subject-wise
+                    study distribution here.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOCUS -->
+
+    <section class="analysis-panel focus-panel">
+
+        <div class="analysis-panel-header">
+
+            <div>
+                <p class="section-label">FOCUS</p>
+                <h2>Focus Performance</h2>
+            </div>
+
+        </div>
+
+        <div class="focus-content">
+
+            <div class="focus-score">
+
+                <strong id="focus-large-score">0</strong>
+
+                <span>/ 5 average focus</span>
+
+            </div>
+
+            <div class="focus-description">
+
+                <p>
+                    Based on your recorded session ratings.
+                </p>
+
+                <span>
+                    <strong id="progress-rated-sessions">0</strong>
+                    rated sessions
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
