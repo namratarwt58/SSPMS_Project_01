@@ -104,4 +104,8 @@ Day 2:
 ## Current Status:
 -Dashboard Completed &  Integrated
 
+## Day 10-11: 
+-Integrated Analytics Layer 
+## Current status
+-Built Progress and Added Analysis
 
